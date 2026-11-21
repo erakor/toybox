@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { type MachineUnit } from '../../types/factory'
+import { useToyboxTheme } from '../theme/ThemeProvider'
+import { type MachineUnit } from '../types'
 
 interface SilhouetteScannerProps {
   machine: MachineUnit
 }
 
 export const SilhouetteScanner: React.FC<SilhouetteScannerProps> = ({ machine }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const [bayMode, setBayMode] = useState<'roller' | 'assembly'>('roller')
 
   const driftMm = machine.active ? Number((machine.vibrationMmS * 0.85).toFixed(2)) : 0

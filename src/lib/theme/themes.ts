@@ -1,14 +1,16 @@
-export const StationThemeId = {
+export const ToyboxThemeId = {
   CockpitHorn: 'cockpit-horn',
   DumpCab: 'dump-cab',
   LinelessBlocks: 'lineless-blocks',
   CreamDecal: 'cream-decal',
   ScreenprintToy: 'screenprint-toy',
+  NightShift: 'night-shift',
+  HighContrast: 'high-contrast',
 } as const
-export type StationThemeId = (typeof StationThemeId)[keyof typeof StationThemeId]
+export type ToyboxThemeId = (typeof ToyboxThemeId)[keyof typeof ToyboxThemeId]
 
-export interface StationThemeConfig {
-  id: StationThemeId
+export interface ToyboxThemeConfig {
+  id: ToyboxThemeId
   number: string
   name: string
   styleTag: string
@@ -65,10 +67,10 @@ const TOY_BASE_TOKENS = {
   isDarkSurface: false,
 } as const
 
-export const STATION_THEMES: StationThemeConfig[] = [
+export const TOYBOX_THEMES: ToyboxThemeConfig[] = [
   {
     ...TOY_BASE_TOKENS,
-    id: StationThemeId.CockpitHorn,
+    id: ToyboxThemeId.CockpitHorn,
     number: '01',
     name: 'Toybox Cockpit & Red Siren',
     styleTag: 'Toy Blue Shell · Red Wheel & Beacon',
@@ -87,7 +89,7 @@ export const STATION_THEMES: StationThemeConfig[] = [
   },
   {
     ...TOY_BASE_TOKENS,
-    id: StationThemeId.DumpCab,
+    id: ToyboxThemeId.DumpCab,
     number: '02',
     name: 'Primary Dump-Cab Stack',
     styleTag: '3 Roof Domes · Yellow Cab · Green Grille',
@@ -106,7 +108,7 @@ export const STATION_THEMES: StationThemeConfig[] = [
   },
   {
     ...TOY_BASE_TOKENS,
-    id: StationThemeId.LinelessBlocks,
+    id: ToyboxThemeId.LinelessBlocks,
     number: '03',
     name: 'Lineless Primary Toy Blocks',
     styleTag: '0px Outlines · Extra-Chubby Shapes',
@@ -126,7 +128,7 @@ export const STATION_THEMES: StationThemeConfig[] = [
   },
   {
     ...TOY_BASE_TOKENS,
-    id: StationThemeId.CreamDecal,
+    id: ToyboxThemeId.CreamDecal,
     number: '04',
     name: 'Cream-Halo Sticker Sheet',
     styleTag: 'Double Peel Rim · Playful Decal Tilt',
@@ -146,7 +148,7 @@ export const STATION_THEMES: StationThemeConfig[] = [
   },
   {
     ...TOY_BASE_TOKENS,
-    id: StationThemeId.ScreenprintToy,
+    id: ToyboxThemeId.ScreenprintToy,
     number: '05',
     name: 'Retro Toybox Screenprint',
     styleTag: 'Solid Flat Offset · Candy Trim',
@@ -163,5 +165,79 @@ export const STATION_THEMES: StationThemeConfig[] = [
     accentText: '#FFFFFF',
     svgStrokeWidth: 3.2,
     swatches: ['#16A34A', '#FACC15', '#EF4444', '#2B99E8'],
+  },
+  {
+    ...TOY_BASE_TOKENS,
+    id: ToyboxThemeId.NightShift,
+    number: '06',
+    name: 'Night Shift',
+    styleTag: 'Slate Canvas · CRT Green Ink',
+    tagline:
+      'After-hours control room: slate canvas, dark plates, and phosphor green ink that glows against the dark surfaces.',
+    inspoNote: 'Dimmed factory floor lit by CRT monitors',
+    stickerNote: 'Green outlines · 3px green ink · dark plates',
+    layoutNote: 'Compact dark console (Instruments grouped by subsystem)',
+    canvasBg: '#0F172A',
+    sidebarBg: '#020617',
+    sidebarHeaderBg: '#0B1220',
+    topBarBg: '#1E293B',
+    cardBg: '#1E293B',
+    cardHeaderBg: '#334155',
+    crtBg: '#020617',
+    borderColor: '#4ADE80',
+    shadowColor: '#020617',
+    inkText: '#4ADE80',
+    mutedText: '#94A3B8',
+    accentText: '#052E16',
+    kpiYellowBg: '#713F12',
+    kpiBlueBg: '#0C4A6E',
+    pipeLight: '#E2E8F0',
+    pipeLavender: '#FACC15',
+    pipeRed: '#F87171',
+    isDarkSurface: true,
+    bezelBg: '#1E293B',
+    nameplateBg: '#14532D',
+    plateBg: '#1E293B',
+    plateAltBg: '#273449',
+    accentBg: '#4ADE80',
+    svgStrokeWidth: 2.5,
+    swatches: ['#0F172A', '#4ADE80', '#1E293B', '#FACC15'],
+  },
+  {
+    ...TOY_BASE_TOKENS,
+    id: ToyboxThemeId.HighContrast,
+    number: '07',
+    name: 'High Contrast',
+    styleTag: 'Black · White · Yellow · 4px Borders',
+    tagline:
+      'Maximum legibility: pure black and white surfaces, yellow accents and heavy 4px borders that clear WCAG AA.',
+    inspoNote: 'Accessibility-first signage',
+    stickerNote: '4px white borders · no shadows · yellow accents',
+    layoutNote: 'Plain stacked panels with generous spacing',
+    canvasBg: '#000000',
+    sidebarBg: '#000000',
+    sidebarHeaderBg: '#000000',
+    topBarBg: '#000000',
+    cardBg: '#000000',
+    cardHeaderBg: '#1A1A1A',
+    crtBg: '#000000',
+    borderColor: '#FFFFFF',
+    shadowColor: '#FFFFFF',
+    inkText: '#FFFFFF',
+    mutedText: '#E5E5E5',
+    accentText: '#000000',
+    kpiYellowBg: '#FFFF00',
+    kpiBlueBg: '#00FFFF',
+    pipeLight: '#FFFFFF',
+    pipeLavender: '#FFFF00',
+    pipeRed: '#FF6666',
+    isDarkSurface: true,
+    bezelBg: '#000000',
+    nameplateBg: '#FFFF00',
+    plateBg: '#000000',
+    plateAltBg: '#1A1A1A',
+    accentBg: '#FFFF00',
+    svgStrokeWidth: 4,
+    swatches: ['#000000', '#FFFFFF', '#FFFF00', '#00FFFF'],
   },
 ]

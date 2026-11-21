@@ -1,8 +1,12 @@
 import React from 'react'
 import { Check, Sparkles } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { DashboardTab, type TelemetryPoint } from '../../types/factory'
-import { type StationThemeConfig, StationThemeId } from '../../types/theme'
+import {
+  DashboardTab,
+  type StationThemeConfig,
+  StationThemeId,
+  type TelemetryPoint,
+  useStationTheme,
+} from '@erakor/toybox'
 
 interface AlternativesViewProps {
   latest: TelemetryPoint

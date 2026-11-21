@@ -1,29 +1,29 @@
 import React from 'react'
 import { AlertTriangle, ArrowRight, CheckCircle2, Palette, Volume2, Wrench } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
 import {
   AlertSeverity,
+  AnalogDialGauge,
+  BatterySunburstCore,
   type BreakerChannel,
+  CockpitDriveCluster,
   DashboardTab,
   type DispatchLogEntry,
+  EnergyFlowChart,
+  HopperCrewPanel,
+  IntercomDispatchPanel,
   MachineStatus,
   type MachineUnit,
   type MaintenanceAlert,
+  MatrixKeypad,
+  OscilloscopePanel,
   type PowerPreset,
   type ShiftGear,
+  SilhouetteScanner,
+  StationThemeId,
   type TelemetryPoint,
-} from '../../types/factory'
-import { StationThemeId } from '../../types/theme'
-import { AnalogDialGauge } from '../instruments/AnalogDialGauge'
-import { BatterySunburstCore } from '../instruments/BatterySunburstCore'
-import { CockpitDriveCluster } from '../instruments/CockpitDriveCluster'
-import { HopperCrewPanel } from '../instruments/HopperCrewPanel'
-import { IntercomDispatchPanel } from '../instruments/IntercomDispatchPanel'
-import { MatrixKeypad } from '../instruments/MatrixKeypad'
-import { OscilloscopePanel } from '../instruments/OscilloscopePanel'
-import { SilhouetteScanner } from '../instruments/SilhouetteScanner'
-import { TunerClockPanel } from '../instruments/TunerClockPanel'
-import { EnergyFlowChart } from '../charts/EnergyFlowChart'
+  TunerClockPanel,
+  useStationTheme,
+} from '@erakor/toybox'
 
 interface PowerStationViewProps {
   machines: MachineUnit[]

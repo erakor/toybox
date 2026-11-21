@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { Power, Search, Sliders } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { MachineStatus, type MachineUnit } from '../../types/factory'
+import { MachineStatus, type MachineUnit, useStationTheme } from '@erakor/toybox'
 
 interface MachineEfficiencyViewProps {
   machines: MachineUnit[]

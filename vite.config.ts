@@ -31,6 +31,8 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
+        '@erakor/toybox/styles.css': path.resolve(__dirname, 'src/lib/styles.css'),
+        '@erakor/toybox': path.resolve(__dirname, 'src/lib/index.ts'),
       },
     },
     server: {

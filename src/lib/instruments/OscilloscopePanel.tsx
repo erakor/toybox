@@ -1,6 +1,6 @@
 import React from 'react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { type BreakerChannel } from '../../types/factory'
+import { useToyboxTheme } from '../theme/ThemeProvider'
+import { type BreakerChannel } from '../types'
 
 interface OscilloscopePanelProps {
   gridHz: number
@@ -19,7 +19,7 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
   breakers,
   onToggleBreaker,
 }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const points: string[] = []
   const width = 240
   const height = 76

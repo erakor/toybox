@@ -1,7 +1,11 @@
 import React, { useMemo, useState } from 'react'
 import { AlertTriangle, CheckCircle2, Search, UserCheck, Wrench, ZapOff } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { AlertLifecycle, AlertSeverity, type MaintenanceAlert } from '../../types/factory'
+import {
+  AlertLifecycle,
+  AlertSeverity,
+  type MaintenanceAlert,
+  useStationTheme,
+} from '@erakor/toybox'
 
 interface MaintenanceAlertsViewProps {
   alerts: MaintenanceAlert[]

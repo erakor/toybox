@@ -1,7 +1,7 @@
 import React from 'react'
 import { Lightbulb, Waves } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { ShiftGear } from '../../types/factory'
+import { useToyboxTheme } from '../theme/ThemeProvider'
+import { ShiftGear } from '../types'
 
 interface CockpitDriveClusterProps {
   shiftGear: ShiftGear
@@ -32,7 +32,7 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
   shiftUnits,
   shiftKwh,
 }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const isLineless = theme.svgStrokeWidth === 0
   const activeIdx = Math.max(
     0,

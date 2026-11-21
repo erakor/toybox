@@ -13,9 +13,8 @@ import {
   Zap,
   ZapOff,
 } from 'lucide-react'
-import { useStationTheme } from './context/ThemeContext'
+import { DashboardTab, useStationTheme } from '@erakor/toybox'
 import { useFactoryTelemetry } from './hooks/useFactoryTelemetry'
-import { DashboardTab } from './types/factory'
 import { PowerStationView } from './components/views/PowerStationView'
 import { MachineEfficiencyView } from './components/views/MachineEfficiencyView'
 import { EnergyGridView } from './components/views/EnergyGridView'

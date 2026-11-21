@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Radio, Send } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { type DispatchLogEntry, type MachineUnit } from '../../types/factory'
+import { useToyboxTheme } from '../theme/ThemeProvider'
+import { type DispatchLogEntry, type MachineUnit } from '../types'
 
 interface IntercomDispatchPanelProps {
   machines: MachineUnit[]
@@ -14,7 +14,7 @@ export const IntercomDispatchPanel: React.FC<IntercomDispatchPanelProps> = ({
   dispatchLogs,
   onSendDispatch,
 }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const isLineless = theme.svgStrokeWidth === 0
   const [targetId, setTargetId] = useState<string>(machines[2]?.id ?? machines[0]?.id ?? 'hg-03')
   const [note, setNote] = useState<string>('Inspect bay seals & alignment')

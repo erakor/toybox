@@ -15,6 +15,7 @@
     "lint": "oxlint --deny-warnings",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
+    "gen:themes": "node scripts/gen-themes.mjs && oxfmt src/lib/theme/themes.css",
     "typecheck": "tsc --noEmit",
     "knip": "knip",
     "test": "vitest run --passWithNoTests"

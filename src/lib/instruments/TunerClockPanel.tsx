@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStationTheme } from '../../context/ThemeContext'
+import { useToyboxTheme } from '../theme/ThemeProvider'
 
 interface TunerClockPanelProps {
   shiftElapsedSec: number
@@ -22,7 +22,7 @@ export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
   criticalCount,
   bayLightsOn,
 }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const isLineless = theme.svgStrokeWidth === 0
 
   const hours = Math.floor((shiftElapsedSec / 3600) % 12)

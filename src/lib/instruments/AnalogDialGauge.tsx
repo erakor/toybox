@@ -1,5 +1,5 @@
 import React from 'react'
-import { useStationTheme } from '../../context/ThemeContext'
+import { useToyboxTheme } from '../theme/ThemeProvider'
 
 interface AnalogDialGaugeProps {
   label: string
@@ -39,7 +39,7 @@ export const AnalogDialGauge: React.FC<AnalogDialGaugeProps> = ({
   variant = 'white',
   size = 'md',
 }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const clamped = Math.min(max, Math.max(min, value))
   const ratio = (clamped - min) / (max - min || 1)
   const startAngle = -135

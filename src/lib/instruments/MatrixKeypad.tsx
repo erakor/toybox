@@ -1,5 +1,5 @@
 import React from 'react'
-import { PowerPreset } from '../../types/factory'
+import { PowerPreset } from '../types'
 
 interface MatrixKeypadProps {
   activePreset: PowerPreset

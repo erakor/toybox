@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { type TelemetryPoint } from '../../types/factory'
+import { type TelemetryPoint } from '../types'
 
 interface EnergyFlowChartProps {
   history: TelemetryPoint[]

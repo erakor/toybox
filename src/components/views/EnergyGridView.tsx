@@ -1,14 +1,14 @@
 import React from 'react'
 import { Zap } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
 import {
+  BatterySunburstCore,
   type BreakerChannel,
+  EnergyFlowChart,
   type MachineUnit,
   type PowerPreset,
   type TelemetryPoint,
-} from '../../types/factory'
-import { EnergyFlowChart } from '../charts/EnergyFlowChart'
-import { BatterySunburstCore } from '../instruments/BatterySunburstCore'
+  useStationTheme,
+} from '@erakor/toybox'
 
 interface EnergyGridViewProps {
   machines: MachineUnit[]

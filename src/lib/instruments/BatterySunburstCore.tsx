@@ -1,6 +1,6 @@
 import React from 'react'
 import { Zap } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
+import { useToyboxTheme } from '../theme/ThemeProvider'
 
 interface BatterySunburstCoreProps {
   batteryPct: number
@@ -19,7 +19,7 @@ export const BatterySunburstCore: React.FC<BatterySunburstCoreProps> = ({
   surgeActive,
   onToggleSurge,
 }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const clampedPct = Math.min(100, Math.max(0, batteryPct))
   const netDraw = Number((totalPowerKw - regenKw).toFixed(1))
 

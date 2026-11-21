@@ -1,7 +1,7 @@
 import React from 'react'
 import { RotateCw, Timer } from 'lucide-react'
-import { useStationTheme } from '../../context/ThemeContext'
-import { type MachineUnit } from '../../types/factory'
+import { useToyboxTheme } from '../theme/ThemeProvider'
+import { type MachineUnit } from '../types'
 
 interface HopperCrewPanelProps {
   machines: MachineUnit[]
@@ -18,7 +18,7 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
   onTipHopperBatch,
   bayLightsOn,
 }) => {
-  const { theme } = useStationTheme()
+  const { theme } = useToyboxTheme()
   const isLineless = theme.svgStrokeWidth === 0
 
   const activeList = machines.filter((m) => m.active)
