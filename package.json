@@ -1,5 +1,5 @@
 {
-  "name": "toybox",
+  "name": "@erakor/toybox",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,14 +11,16 @@
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
-    "clean": "rm -rf dist storybook-static",
+    "clean": "rm -rf dist demo-dist storybook-static",
     "lint": "oxlint --deny-warnings",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "gen:themes": "node scripts/gen-themes.mjs && oxfmt src/lib/theme/themes.css",
     "typecheck": "tsc --noEmit",
     "knip": "knip",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "build:lib": "vite build --config vite.lib.config.ts",
+    "prepare": "vite build --config vite.lib.config.ts"
   },
   "dependencies": {
     "lucide-react": "1.77.0",
@@ -31,6 +33,7 @@
     "@types/node": "^22.14.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@typescript/typescript6": "^6.0.2",
     "@vitejs/plugin-react": "6.3.0",
     "knip": "6.47.0",
     "oxfmt": "0.79.0",
@@ -38,6 +41,27 @@
     "tailwindcss": "4.3.5",
     "typescript": "7.0.2",
     "vite": "8.3.8",
+    "vite-plugin-dts": "5.1.2",
     "vitest": "5.1.1"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/toybox.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "lucide-react": ">=1",
+    "react": "^19",
+    "react-dom": "^19"
   }
 }

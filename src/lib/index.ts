@@ -1,3 +1,4 @@
+import './styles.css'
 import { useToyboxTheme } from './theme/ThemeProvider'
 import { TOYBOX_THEMES, ToyboxThemeId, type ToyboxThemeConfig } from './theme/themes'
 

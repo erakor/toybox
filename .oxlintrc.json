@@ -1,6 +1,6 @@
 {
   "extends": ["./node_modules/@erakor/toolchain/oxlint/react.json"],
-  "ignorePatterns": ["dist/", "storybook-static/"],
+  "ignorePatterns": ["dist/", "demo-dist/", "storybook-static/"],
   "overrides": [
     {
       "files": ["**/*.stories.{ts,tsx}"],

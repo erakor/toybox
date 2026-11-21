@@ -19,7 +19,7 @@ export default defineConfig(() => {
           if (error) {
             return
           }
-          const distDir = path.resolve(__dirname, 'dist')
+          const distDir = path.resolve(__dirname, 'demo-dist')
           const srcAssets = path.resolve(__dirname, 'src/assets')
           const distAssets = path.resolve(distDir, 'src/assets')
           if (fs.existsSync(distDir) && fs.existsSync(srcAssets)) {
@@ -35,6 +35,7 @@ export default defineConfig(() => {
         '@erakor/toybox': path.resolve(__dirname, 'src/lib/index.ts'),
       },
     },
+    build: { outDir: 'demo-dist' },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
