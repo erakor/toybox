@@ -1,0 +1,6 @@
+{
+  "name": "BrickVolt Power Station",
+  "description": "Real-time industrial control dashboard for the BrickVolt modular power station, tracking machine efficiency, energy consumption, and maintenance alerts.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
