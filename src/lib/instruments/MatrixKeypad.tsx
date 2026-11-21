@@ -26,7 +26,7 @@ const MATRIX_TILES: {
   {
     preset: PowerPreset.PeakBoost,
     shortLabel: 'PEAK',
-    colorClass: 'bg-red-500 text-white',
+    colorClass: 'bg-[#dc2626] text-white',
   },
   {
     preset: PowerPreset.CoolantFlush,
@@ -36,7 +36,7 @@ const MATRIX_TILES: {
   {
     preset: PowerPreset.HarmonicSync,
     shortLabel: 'SYNC',
-    colorClass: 'bg-purple-500 text-white',
+    colorClass: 'bg-purple-700 text-white',
   },
   {
     preset: PowerPreset.LoadShed,
@@ -72,7 +72,7 @@ export const MatrixKeypad: React.FC<MatrixKeypadProps> = ({
               aria-pressed={isSelected}
               className={`cartoon-btn h-10 rounded-xl font-mono text-xs font-bold tracking-tight cursor-pointer flex items-center justify-center ${
                 tile.colorClass
-              } ${isSelected ? 'ring-2 ring-white scale-[1.03]' : 'opacity-85 hover:opacity-100'}`}
+              } ${isSelected ? 'ring-2 ring-white scale-[1.03]' : 'opacity-95 hover:opacity-100'}`}
             >
               {tile.shortLabel}
             </button>

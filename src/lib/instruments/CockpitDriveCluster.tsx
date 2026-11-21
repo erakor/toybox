@@ -69,7 +69,7 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
                   aria-pressed={selected}
                   className={`px-2.5 py-1 rounded-xl font-mono text-xs font-bold flex items-center justify-between cursor-pointer transition-colors ${
                     selected
-                      ? 'bg-red-500 text-white'
+                      ? 'bg-[#dc2626] text-white'
                       : 'bg-white text-slate-900 hover:bg-amber-100'
                   }`}
                   style={{
@@ -77,9 +77,7 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
                   }}
                 >
                   <span>{item.label}</span>
-                  <span className="font-sans text-[10px] font-semibold opacity-90">
-                    {item.hint}
-                  </span>
+                  <span className="font-sans text-[10px] font-semibold">{item.hint}</span>
                 </button>
               )
             })}
@@ -113,9 +111,7 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
             >
               <span
                 className={`w-11 h-11 rounded-full cartoon-btn flex items-center justify-center font-display text-base font-bold transition-transform ${
-                  bayLightsOn
-                    ? 'bg-amber-300 text-slate-950 scale-105'
-                    : 'bg-red-500 text-white opacity-85'
+                  bayLightsOn ? 'bg-amber-300 text-slate-950 scale-105' : 'bg-[#dc2626] text-white'
                 }`}
               >
                 L
@@ -136,7 +132,7 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
                 className={`w-11 h-11 rounded-full cartoon-btn flex items-center justify-center font-display text-base font-bold transition-transform ${
                   coolantPurgeOn
                     ? 'bg-cyan-400 text-slate-950 scale-105'
-                    : 'bg-red-500 text-white opacity-85'
+                    : 'bg-[#dc2626] text-white'
                 }`}
               >
                 W

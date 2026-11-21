@@ -158,7 +158,7 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
               aria-pressed={b.closed}
               title={`Toggle ${b.label} (${b.closed ? 'Online' : 'Isolated'})`}
               className={`cartoon-btn flex flex-col items-center p-2 rounded-2xl cursor-pointer ${
-                b.closed ? 'bg-slate-100 hover:bg-amber-100' : 'bg-slate-400 hover:bg-slate-300'
+                b.closed ? 'bg-slate-100 hover:bg-amber-100' : 'bg-slate-300 hover:bg-slate-200'
               }`}
             >
               <div className="w-7 h-12 rounded-xl bg-slate-950 p-1 flex flex-col justify-between border border-slate-950">

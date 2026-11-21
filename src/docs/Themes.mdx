@@ -1,0 +1,35 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { Badge, Button, Panel, TOYBOX_THEMES, ToyboxThemeProvider } from '@erakor/toybox'
+
+<Meta title="Themes" />
+
+# Themes
+
+Each theme is a `[data-toybox-theme]` block of `--bv-*` CSS variables plus structural rules in
+`styles.css`. Add a theme by adding a config to `themes.ts`, running `pnpm gen:themes`, and adding
+any border or shadow rules to `styles.css`.
+
+{TOYBOX_THEMES.map((theme) => (
+
+  <ToyboxThemeProvider key={theme.id} theme={theme.id} className="mb-6 rounded-xl p-4">
+    <h3 style={{ margin: '0 0 8px' }}>
+      {theme.number}. {theme.name}
+    </h3>
+    <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
+      {theme.swatches.map((color) => (
+        <span
+          key={color}
+          title={color}
+          style={{ width: 32, height: 32, borderRadius: 8, background: color, border: '2px solid #888' }}
+        />
+      ))}
+    </div>
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+      <Panel className="px-4 py-2 text-sm font-bold">Panel</Panel>
+      <Button>Default</Button>
+      <Button variant="accent">Accent</Button>
+      <Badge tone="ok">Optimal</Badge>
+      <Badge tone="danger">Critical</Badge>
+    </div>
+  </ToyboxThemeProvider>
+))}

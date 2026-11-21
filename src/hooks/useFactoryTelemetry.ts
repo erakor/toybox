@@ -13,6 +13,7 @@ import {
   PowerPreset,
   ShiftGear,
   type TelemetryPoint,
+  buildBreakers,
   buildInitialHistory,
   clamp,
   formatClock,
@@ -98,18 +99,7 @@ export function useFactoryTelemetry() {
   const dispatchSeqRef = useRef(103)
   const hornTimeoutRef = useRef<number | null>(null)
 
-  const breakers: BreakerChannel[] = useMemo(
-    () =>
-      machines.map((m, idx) => ({
-        id: `BRK-${idx + 1}`,
-        label: m.code,
-        machineId: m.id,
-        closed: m.active,
-        amps: m.active ? Number(((m.powerKw * 1000) / (480 * 1.732)).toFixed(1)) : 0,
-        maxAmps: 180,
-      })),
-    [machines],
-  )
+  const breakers: BreakerChannel[] = useMemo(() => buildBreakers(machines), [machines])
 
   useEffect(() => {
     if (!isStreaming) return

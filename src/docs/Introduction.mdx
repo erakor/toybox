@@ -1,0 +1,33 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="Introduction" />
+
+# Toybox
+
+Toy-inspired React components: 8 primitives, 9 instruments and an energy flow chart, with 7 themes.
+
+## Install
+
+Toybox is installed from GitHub and is not published to npm.
+
+```bash
+pnpm add github:erakor/toybox#vX.Y.Z react react-dom lucide-react
+```
+
+## Use
+
+```tsx
+import { Button, ToyboxThemeProvider, ToyboxThemeId } from '@erakor/toybox'
+import '@erakor/toybox/styles.css'
+
+export function App() {
+  return (
+    <ToyboxThemeProvider defaultTheme={ToyboxThemeId.NightShift}>
+      <Button variant="accent">Dispatch</Button>
+    </ToyboxThemeProvider>
+  )
+}
+```
+
+`ToyboxThemeProvider` renders a wrapper element with `data-toybox-theme`, so themes are scoped to a
+subtree and can be nested. Use the toolbar above to switch theme for every story.

@@ -33,7 +33,7 @@ export const IntercomDispatchPanel: React.FC<IntercomDispatchPanelProps> = ({
             Page bay technicians directly from the cockpit mic
           </p>
         </div>
-        <span className="font-mono text-xs font-bold text-white bg-red-500 cartoon-box-sm rounded-xl px-2.5 py-0.5 inline-flex items-center gap-1">
+        <span className="font-mono text-xs font-bold text-white bg-[#dc2626] cartoon-box-sm rounded-xl px-2.5 py-0.5 inline-flex items-center gap-1">
           <Radio className="w-3 h-3" />
           CH-04
         </span>
@@ -130,7 +130,7 @@ export const IntercomDispatchPanel: React.FC<IntercomDispatchPanelProps> = ({
             <button
               type="button"
               onClick={handleDispatch}
-              className="cartoon-btn px-3 py-1.5 rounded-xl bg-red-500 hover:bg-red-400 text-white text-xs font-bold inline-flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer"
+              className="cartoon-btn px-3 py-1.5 rounded-xl bg-[#dc2626] hover:bg-red-500 text-white text-xs font-bold inline-flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer"
             >
               <Send className="w-3 h-3" />
               Page Tech

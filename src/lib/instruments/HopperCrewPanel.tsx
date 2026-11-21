@@ -179,7 +179,7 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
           <button
             type="button"
             onClick={onTipHopperBatch}
-            className="cartoon-btn px-3 py-2 rounded-xl bg-red-500 hover:bg-red-400 text-white text-xs font-bold inline-flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer"
+            className="cartoon-btn px-3 py-2 rounded-xl bg-[#dc2626] hover:bg-red-500 text-white text-xs font-bold inline-flex items-center gap-1 whitespace-nowrap shrink-0 cursor-pointer"
           >
             <RotateCw className="w-3.5 h-3.5" />
             Tip Batch

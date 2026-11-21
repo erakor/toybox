@@ -37,7 +37,7 @@ export const BatterySunburstCore: React.FC<BatterySunburstCoreProps> = ({
           onClick={onToggleSurge}
           className={`cartoon-btn px-3.5 py-2 rounded-2xl text-xs font-bold whitespace-nowrap shrink-0 flex items-center gap-1.5 cursor-pointer ${
             surgeActive
-              ? 'bg-red-500 text-white hover:bg-red-400'
+              ? 'bg-[#dc2626] text-white hover:bg-red-500'
               : 'bg-amber-300 text-slate-950 hover:bg-amber-200'
           }`}
         >

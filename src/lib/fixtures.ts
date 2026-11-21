@@ -1,6 +1,7 @@
 import {
   AlertLifecycle,
   AlertSeverity,
+  type BreakerChannel,
   type DispatchLogEntry,
   MachineStatus,
   type MachineUnit,
@@ -239,4 +240,16 @@ export function buildInitialHistory(): TelemetryPoint[] {
     })
   }
   return points
+}
+
+/** One breaker per machine, closed when the machine is active. */
+export function buildBreakers(machines: MachineUnit[]): BreakerChannel[] {
+  return machines.map((m, idx) => ({
+    id: `BRK-${idx + 1}`,
+    label: m.code,
+    machineId: m.id,
+    closed: m.active,
+    amps: m.active ? Number(((m.powerKw * 1000) / (480 * 1.732)).toFixed(1)) : 0,
+    maxAmps: 180,
+  }))
 }

@@ -41,6 +41,7 @@ export {
   INITIAL_ALERTS,
   INITIAL_DISPATCHES,
   INITIAL_MACHINES,
+  buildBreakers,
   buildInitialHistory,
   clamp,
   formatClock,
