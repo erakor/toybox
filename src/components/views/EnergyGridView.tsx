@@ -1,22 +1,27 @@
-import React from 'react';
-import {Zap} from 'lucide-react';
-import {useStationTheme} from '../../context/ThemeContext';
-import {BreakerChannel, MachineUnit, PowerPreset, TelemetryPoint} from '../../types/factory';
-import {EnergyFlowChart} from '../charts/EnergyFlowChart';
-import {BatterySunburstCore} from '../instruments/BatterySunburstCore';
+import React from 'react'
+import { Zap } from 'lucide-react'
+import {
+  BatterySunburstCore,
+  type BreakerChannel,
+  EnergyFlowChart,
+  type MachineUnit,
+  type PowerPreset,
+  type TelemetryPoint,
+  useStationTheme,
+} from '@erakor/toybox'
 
 interface EnergyGridViewProps {
-  machines: MachineUnit[];
-  history: TelemetryPoint[];
-  latest: TelemetryPoint;
-  breakers: BreakerChannel[];
-  peakThresholdKw: number;
-  shiftKwh: number;
-  surgeActive: boolean;
-  activePreset: PowerPreset;
-  onChangePeakThreshold: (kw: number) => void;
-  onToggleBreaker: (machineId: string) => void;
-  onToggleSurge: () => void;
+  machines: MachineUnit[]
+  history: TelemetryPoint[]
+  latest: TelemetryPoint
+  breakers: BreakerChannel[]
+  peakThresholdKw: number
+  shiftKwh: number
+  surgeActive: boolean
+  activePreset: PowerPreset
+  onChangePeakThreshold: (kw: number) => void
+  onToggleBreaker: (machineId: string) => void
+  onToggleSurge: () => void
 }
 
 export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
@@ -32,16 +37,16 @@ export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
   onToggleBreaker,
   onToggleSurge,
 }) => {
-  const {theme} = useStationTheme();
-  const ratePerKwh = 0.142;
-  const shiftCostUsd = shiftKwh * ratePerKwh;
-  const netPowerKw = Math.max(0, latest.totalPowerKw - latest.regenKw);
-  const headroomKw = peakThresholdKw - latest.totalPowerKw;
+  const { theme } = useStationTheme()
+  const ratePerKwh = 0.142
+  const shiftCostUsd = shiftKwh * ratePerKwh
+  const netPowerKw = Math.max(0, latest.totalPowerKw - latest.regenKw)
+  const headroomKw = peakThresholdKw - latest.totalPowerKw
 
   return (
     <div className="flex flex-col gap-6">
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        <div className="cartoon-box rounded-3xl p-4" style={{backgroundColor: theme.kpiYellowBg}}>
+        <div className="cartoon-box rounded-3xl p-4" style={{ backgroundColor: theme.kpiYellowBg }}>
           <div className="text-xs font-bold bv-muted">Net Grid Import</div>
           <div className="font-mono text-2xl font-bold bv-ink tabular-nums mt-1">
             {netPowerKw.toFixed(1)} kW
@@ -55,8 +60,12 @@ export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
           <div
             className={`font-mono text-2xl font-bold tabular-nums mt-1 ${
               headroomKw < 30
-                ? theme.isDarkSurface ? 'text-rose-300' : 'text-red-600'
-                : theme.isDarkSurface ? 'text-emerald-300' : 'text-emerald-700'
+                ? theme.isDarkSurface
+                  ? 'text-rose-300'
+                  : 'text-red-600'
+                : theme.isDarkSurface
+                  ? 'text-emerald-300'
+                  : 'text-emerald-700'
             }`}
           >
             {headroomKw >= 0 ? `+${headroomKw.toFixed(1)}` : headroomKw.toFixed(1)} kW
@@ -74,7 +83,7 @@ export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
             {shiftKwh.toFixed(1)} kWh @ ${ratePerKwh.toFixed(3)}/kWh
           </div>
         </div>
-        <div className="cartoon-box rounded-3xl p-4" style={{backgroundColor: theme.kpiBlueBg}}>
+        <div className="cartoon-box rounded-3xl p-4" style={{ backgroundColor: theme.kpiBlueBg }}>
           <div className="text-xs font-bold bv-muted">Bus Voltage & Frequency</div>
           <div className="font-mono text-2xl font-bold bv-ink tabular-nums mt-1">
             {latest.busVoltageV.toFixed(1)} V
@@ -89,9 +98,7 @@ export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
         <div className="xl:col-span-7 cartoon-box rounded-3xl steel-plate p-5 flex flex-col justify-between gap-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h3 className="font-display text-lg font-bold bv-ink">
-                Real-Time Load Demand Curve
-              </h3>
+              <h3 className="font-display text-lg font-bold bv-ink">Real-Time Load Demand Curve</h3>
               <p className="text-xs font-medium bv-muted">
                 Adjust peak demand cap to monitor load-shedding headroom
               </p>
@@ -113,11 +120,7 @@ export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
             </div>
           </div>
 
-          <EnergyFlowChart
-            history={history}
-            peakThresholdKw={peakThresholdKw}
-            heightClass="h-64"
-          />
+          <EnergyFlowChart history={history} peakThresholdKw={peakThresholdKw} heightClass="h-64" />
         </div>
 
         <div className="xl:col-span-5 cartoon-box rounded-3xl steel-plate p-5">
@@ -161,21 +164,26 @@ export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
             </thead>
             <tbody className="divide-y divide-slate-300/40 text-xs">
               {machines.map((m, idx) => {
-                const breaker = breakers[idx];
+                const breaker = breakers[idx]
                 const sharePct =
-                  latest.totalPowerKw > 0 ? (m.powerKw / latest.totalPowerKw) * 100 : 0;
+                  latest.totalPowerKw > 0 ? (m.powerKw / latest.totalPowerKw) * 100 : 0
                 return (
                   <tr key={m.id} className="hover:bg-amber-400/10 transition-colors">
                     <td className="py-3 px-4">
-                      <span className={`font-mono font-bold mr-1.5 ${theme.isDarkSurface ? 'text-cyan-300' : 'text-blue-700'}`}>{m.code}</span>
+                      <span
+                        className={`font-mono font-bold mr-1.5 ${theme.isDarkSurface ? 'text-cyan-300' : 'text-blue-700'}`}
+                      >
+                        {m.code}
+                      </span>
                       <span className="font-bold bv-ink">{m.name}</span>
                     </td>
                     <td className="py-3 px-3 w-48">
+                      <span className="sr-only">{`${m.name} share of output`}</span>
                       <div className="flex items-center gap-2">
                         <div className="flex-1 h-3 bg-slate-200 border bv-border rounded-full overflow-hidden">
                           <div
                             className="h-full rounded-full bg-amber-400 transition-all duration-300"
-                            style={{width: `${Math.min(100, sharePct)}%`}}
+                            style={{ width: `${Math.min(100, sharePct)}%` }}
                           />
                         </div>
                         <span className="font-mono text-[11px] font-bold bv-ink tabular-nums w-11 text-right">
@@ -207,12 +215,12 @@ export const EnergyGridView: React.FC<EnergyGridViewProps> = ({
                       </button>
                     </td>
                   </tr>
-                );
+                )
               })}
             </tbody>
           </table>
         </div>
       </section>
     </div>
-  );
-};
+  )
+}

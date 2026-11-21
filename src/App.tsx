@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react'
 import {
   Activity,
   AlertTriangle,
@@ -12,22 +12,21 @@ import {
   X,
   Zap,
   ZapOff,
-} from 'lucide-react';
-import {useStationTheme} from './context/ThemeContext';
-import {useFactoryTelemetry} from './hooks/useFactoryTelemetry';
-import {DashboardTab} from './types/factory';
-import {PowerStationView} from './components/views/PowerStationView';
-import {MachineEfficiencyView} from './components/views/MachineEfficiencyView';
-import {EnergyGridView} from './components/views/EnergyGridView';
-import {MaintenanceAlertsView} from './components/views/MaintenanceAlertsView';
-import {StationPhotosView} from './components/views/StationPhotosView';
-import {AlternativesView} from './components/views/AlternativesView';
+} from 'lucide-react'
+import { DashboardTab, useStationTheme } from '@erakor/toybox'
+import { useFactoryTelemetry } from './hooks/useFactoryTelemetry'
+import { PowerStationView } from './components/views/PowerStationView'
+import { MachineEfficiencyView } from './components/views/MachineEfficiencyView'
+import { EnergyGridView } from './components/views/EnergyGridView'
+import { MaintenanceAlertsView } from './components/views/MaintenanceAlertsView'
+import { StationPhotosView } from './components/views/StationPhotosView'
+import { AlternativesView } from './components/views/AlternativesView'
 
 const NAV_ITEMS: {
-  id: DashboardTab;
-  label: string;
-  breadcrumb: string;
-  icon: typeof Gauge;
+  id: DashboardTab
+  label: string
+  breadcrumb: string
+  icon: typeof Gauge
 }[] = [
   {
     id: DashboardTab.Alternatives,
@@ -65,12 +64,12 @@ const NAV_ITEMS: {
     breadcrumb: 'Physical Reference',
     icon: Camera,
   },
-];
+]
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<DashboardTab>(DashboardTab.Alternatives);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const {theme} = useStationTheme();
+  const [activeTab, setActiveTab] = useState<DashboardTab>(DashboardTab.Alternatives)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { theme } = useStationTheme()
 
   const {
     machines,
@@ -116,19 +115,19 @@ export default function App() {
     resolveAlert,
     injectFault,
     resetStation,
-  } = useFactoryTelemetry();
+  } = useFactoryTelemetry()
 
-  const currentNav = NAV_ITEMS.find((item) => item.id === activeTab) ?? NAV_ITEMS[0];
+  const currentNav = NAV_ITEMS.find((item) => item.id === activeTab) ?? NAV_ITEMS[0]
 
   const handleSelectTab = (tab: DashboardTab) => {
-    setActiveTab(tab);
-    setMobileMenuOpen(false);
-  };
+    setActiveTab(tab)
+    setMobileMenuOpen(false)
+  }
 
   return (
     <div
       className="min-h-screen flex transition-colors duration-200"
-      style={{backgroundColor: theme.canvasBg, color: theme.inkText}}
+      style={{ backgroundColor: theme.canvasBg, color: theme.inkText }}
     >
       {/* Mobile Sidebar Backdrop */}
       {mobileMenuOpen && (
@@ -144,17 +143,17 @@ export default function App() {
         className={`fixed lg:sticky top-0 left-0 z-40 h-screen w-64 shrink-0 border-r-[3px] bv-border flex flex-col justify-between transition-transform duration-200 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
-        style={{backgroundColor: theme.sidebarBg}}
+        style={{ backgroundColor: theme.sidebarBg }}
       >
         <div className="flex flex-col">
           <div
             className="h-16 px-5 border-b-[3px] bv-border flex items-center justify-between"
-            style={{backgroundColor: theme.sidebarHeaderBg}}
+            style={{ backgroundColor: theme.sidebarHeaderBg }}
           >
             <div className="flex items-center gap-2.5">
               <div
                 className="w-8 h-8 rounded-full cartoon-box-sm flex items-center justify-center shrink-0"
-                style={{backgroundColor: theme.accentBg}}
+                style={{ backgroundColor: theme.accentBg }}
               >
                 <span className="w-3.5 h-3.5 rounded-full bg-red-500" />
               </div>
@@ -175,8 +174,8 @@ export default function App() {
 
           <nav className="p-3 flex flex-col gap-1.5" aria-label="Primary Workspace Navigation">
             {NAV_ITEMS.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
+              const Icon = item.icon
+              const isActive = activeTab === item.id
               return (
                 <button
                   key={item.id}
@@ -189,7 +188,7 @@ export default function App() {
                   }`}
                   style={
                     isActive
-                      ? {backgroundColor: theme.accentBg, color: theme.accentText}
+                      ? { backgroundColor: theme.accentBg, color: theme.accentText }
                       : undefined
                   }
                 >
@@ -203,14 +202,14 @@ export default function App() {
                     </span>
                   )}
                 </button>
-              );
+              )
             })}
           </nav>
         </div>
 
         <div
           className="p-4 border-t-[3px] bv-border flex flex-col gap-3"
-          style={{backgroundColor: theme.sidebarHeaderBg}}
+          style={{ backgroundColor: theme.sidebarHeaderBg }}
         >
           <div className="flex items-center justify-between text-xs font-semibold text-slate-300">
             <span>Tick Cadence</span>
@@ -221,8 +220,8 @@ export default function App() {
                 className="px-2.5 py-0.5 rounded-lg font-mono text-[11px] font-bold cursor-pointer"
                 style={
                   speedMultiplier === 1
-                    ? {backgroundColor: theme.accentBg, color: theme.accentText}
-                    : {color: '#CBD5E1'}
+                    ? { backgroundColor: theme.accentBg, color: theme.accentText }
+                    : { color: '#CBD5E1' }
                 }
               >
                 1x
@@ -233,8 +232,8 @@ export default function App() {
                 className="px-2.5 py-0.5 rounded-lg font-mono text-[11px] font-bold cursor-pointer"
                 style={
                   speedMultiplier === 2
-                    ? {backgroundColor: theme.accentBg, color: theme.accentText}
-                    : {color: '#CBD5E1'}
+                    ? { backgroundColor: theme.accentBg, color: theme.accentText }
+                    : { color: '#CBD5E1' }
                 }
               >
                 2x
@@ -257,7 +256,7 @@ export default function App() {
       <div className="flex-1 flex flex-col min-w-0">
         <header
           className="h-16 px-4 sm:px-6 border-b-[3px] bv-border sticky top-0 z-20 flex items-center justify-between gap-6"
-          style={{backgroundColor: theme.topBarBg}}
+          style={{ backgroundColor: theme.topBarBg }}
         >
           <div className="flex items-center gap-3 min-w-0">
             <button
@@ -270,9 +269,13 @@ export default function App() {
             </button>
             <div className="flex items-center gap-2 text-xs sm:text-sm bv-muted font-medium truncate">
               <span className="hidden sm:inline whitespace-nowrap">BrickVolt Works</span>
-              <span className="hidden sm:inline" aria-hidden="true">/</span>
+              <span className="hidden sm:inline" aria-hidden="true">
+                /
+              </span>
               <span className="hidden md:inline whitespace-nowrap">Sector A</span>
-              <span className="hidden md:inline" aria-hidden="true">/</span>
+              <span className="hidden md:inline" aria-hidden="true">
+                /
+              </span>
               <span className="font-display text-base font-bold bv-ink truncate">
                 {currentNav.breadcrumb}
               </span>
@@ -295,8 +298,8 @@ export default function App() {
               className="cartoon-btn px-4 py-2 rounded-2xl text-xs font-bold whitespace-nowrap shrink-0 inline-flex items-center gap-1.5 cursor-pointer"
               style={
                 isStreaming
-                  ? {backgroundColor: theme.accentBg, color: theme.accentText}
-                  : {backgroundColor: '#34D399', color: '#0F172A'}
+                  ? { backgroundColor: theme.accentBg, color: theme.accentText }
+                  : { backgroundColor: '#34D399', color: '#0F172A' }
               }
             >
               {isStreaming ? (
@@ -396,5 +399,5 @@ export default function App() {
         </main>
       </div>
     </div>
-  );
+  )
 }

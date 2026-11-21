@@ -1,10 +1,10 @@
-import {createRoot} from 'react-dom/client';
-import App from './App.tsx';
-import {ThemeProvider} from './context/ThemeContext.tsx';
-import './index.css';
+import { createRoot } from 'react-dom/client'
+import { ToyboxThemeProvider } from '@erakor/toybox'
+import '@erakor/toybox/styles.css'
+import App from './App'
 
 createRoot(document.getElementById('root')!).render(
-  <ThemeProvider>
+  <ToyboxThemeProvider className="min-h-screen">
     <App />
-  </ThemeProvider>
-);
+  </ToyboxThemeProvider>,
+)

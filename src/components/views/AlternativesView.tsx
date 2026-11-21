@@ -1,12 +1,16 @@
-import React from 'react';
-import {Check, Sparkles} from 'lucide-react';
-import {useStationTheme} from '../../context/ThemeContext';
-import {DashboardTab, TelemetryPoint} from '../../types/factory';
-import {StationThemeConfig, StationThemeId} from '../../types/theme';
+import React from 'react'
+import { Check, Sparkles } from 'lucide-react'
+import {
+  DashboardTab,
+  type StationThemeConfig,
+  StationThemeId,
+  type TelemetryPoint,
+  useStationTheme,
+} from '@erakor/toybox'
 
 interface AlternativesViewProps {
-  latest: TelemetryPoint;
-  onNavigateTab: (tab: DashboardTab) => void;
+  latest: TelemetryPoint
+  onNavigateTab: (tab: DashboardTab) => void
 }
 
 function getCardFrameStyle(cfg: StationThemeConfig, isActive: boolean): React.CSSProperties {
@@ -17,23 +21,19 @@ function getCardFrameStyle(cfg: StationThemeConfig, isActive: boolean): React.CS
         border: '0px solid transparent',
         borderRadius: '2rem',
         boxShadow: isActive ? `0 0 0 4px ${cfg.bezelBg}` : 'none',
-      };
+      }
     case StationThemeId.CreamDecal:
       return {
         backgroundColor: cfg.canvasBg,
         border: '3px solid #FEF3C7',
-        boxShadow: isActive
-          ? `0 0 0 4px ${cfg.bezelBg}`
-          : `0 0 0 2.5px ${cfg.borderColor}`,
-      };
+        boxShadow: isActive ? `0 0 0 4px ${cfg.bezelBg}` : `0 0 0 2.5px ${cfg.borderColor}`,
+      }
     case StationThemeId.ScreenprintToy:
       return {
         backgroundColor: cfg.canvasBg,
         border: `3px solid ${cfg.borderColor}`,
-        boxShadow: isActive
-          ? `7px 7px 0 ${cfg.shadowColor}`
-          : `5px 5px 0 ${cfg.shadowColor}`,
-      };
+        boxShadow: isActive ? `7px 7px 0 ${cfg.shadowColor}` : `5px 5px 0 ${cfg.shadowColor}`,
+      }
     case StationThemeId.DumpCab:
     case StationThemeId.CockpitHorn:
     default:
@@ -41,7 +41,7 @@ function getCardFrameStyle(cfg: StationThemeConfig, isActive: boolean): React.CS
         backgroundColor: cfg.canvasBg,
         border: `3px solid ${cfg.borderColor}`,
         boxShadow: isActive ? `0 0 0 4px ${cfg.bezelBg}` : 'none',
-      };
+      }
   }
 }
 
@@ -52,13 +52,13 @@ function getBezelStyle(cfg: StationThemeConfig): React.CSSProperties {
         backgroundColor: cfg.bezelBg,
         border: '0px solid transparent',
         borderRadius: '2rem',
-      };
+      }
     case StationThemeId.CreamDecal:
       return {
         backgroundColor: cfg.bezelBg,
         border: '3px solid #FEF3C7',
         boxShadow: `0 0 0 2.5px ${cfg.borderColor}`,
-      };
+      }
     case StationThemeId.ScreenprintToy:
       return {
         backgroundColor: cfg.bezelBg,
@@ -66,23 +66,19 @@ function getBezelStyle(cfg: StationThemeConfig): React.CSSProperties {
           'repeating-linear-gradient(-45deg, #16A34A 0px, #16A34A 12px, #15803D 12px, #15803D 24px)',
         border: `3px solid ${cfg.borderColor}`,
         boxShadow: `4px 4px 0 ${cfg.shadowColor}`,
-      };
+      }
     case StationThemeId.DumpCab:
     case StationThemeId.CockpitHorn:
     default:
       return {
         backgroundColor: cfg.bezelBg,
         border: `3px solid ${cfg.borderColor}`,
-      };
+      }
   }
 }
 
-function getStickerStyle(
-  cfg: StationThemeConfig,
-  bg: string,
-  tiltDeg = 0
-): React.CSSProperties {
-  const transform = tiltDeg !== 0 ? `rotate(${tiltDeg}deg)` : undefined;
+function getStickerStyle(cfg: StationThemeConfig, bg: string, tiltDeg = 0): React.CSSProperties {
+  const transform = tiltDeg !== 0 ? `rotate(${tiltDeg}deg)` : undefined
   switch (cfg.id) {
     case StationThemeId.LinelessBlocks:
       return {
@@ -90,44 +86,44 @@ function getStickerStyle(
         border: '0px solid transparent',
         borderRadius: '1.5rem',
         transform,
-      };
+      }
     case StationThemeId.CreamDecal:
       return {
         backgroundColor: bg,
         border: '2.5px solid #FEF3C7',
         boxShadow: `0 0 0 2px ${cfg.borderColor}`,
         transform,
-      };
+      }
     case StationThemeId.ScreenprintToy:
       return {
         backgroundColor: bg,
         border: `2.5px solid ${cfg.borderColor}`,
         boxShadow: `3px 3px 0 ${cfg.shadowColor}`,
         transform,
-      };
+      }
     case StationThemeId.DumpCab:
       return {
         backgroundColor: bg,
         border: `2.5px solid ${cfg.borderColor}`,
         boxShadow: '0 0 0 2.5px #FFFFFF',
         transform,
-      };
+      }
     case StationThemeId.CockpitHorn:
     default:
       return {
         backgroundColor: bg,
         border: `2.5px solid ${cfg.borderColor}`,
         transform,
-      };
+      }
   }
 }
 
-const MiniDial: React.FC<{cfg: StationThemeConfig; needleAngle: number; ringColor?: string}> = ({
+const MiniDial: React.FC<{ cfg: StationThemeConfig; needleAngle: number; ringColor?: string }> = ({
   cfg,
   needleAngle,
   ringColor,
 }) => {
-  const lineless = cfg.svgStrokeWidth === 0;
+  const lineless = cfg.svgStrokeWidth === 0
   return (
     <svg viewBox="0 0 80 80" className="w-13 h-13">
       <circle
@@ -172,11 +168,11 @@ const MiniDial: React.FC<{cfg: StationThemeConfig; needleAngle: number; ringColo
         strokeWidth={lineless ? 0 : 2}
       />
     </svg>
-  );
-};
+  )
+}
 
-const MiniBattery: React.FC<{cfg: StationThemeConfig}> = ({cfg}) => {
-  const lineless = cfg.svgStrokeWidth === 0;
+const MiniBattery: React.FC<{ cfg: StationThemeConfig }> = ({ cfg }) => {
+  const lineless = cfg.svgStrokeWidth === 0
   return (
     <svg viewBox="0 0 60 76" className="w-9 h-11">
       <rect
@@ -208,16 +204,16 @@ const MiniBattery: React.FC<{cfg: StationThemeConfig}> = ({cfg}) => {
         strokeLinecap="round"
       />
     </svg>
-  );
-};
+  )
+}
 
 const MiniPreviewConsole: React.FC<{
-  cfg: StationThemeConfig;
-  latest: TelemetryPoint;
-}> = ({cfg, latest}) => {
-  const ratio = Math.min(1, Math.max(0, (latest.fleetOee - 50) / 50));
-  const needleAngle = -120 + ratio * 240;
-  const lineless = cfg.svgStrokeWidth === 0;
+  cfg: StationThemeConfig
+  latest: TelemetryPoint
+}> = ({ cfg, latest }) => {
+  const ratio = Math.min(1, Math.max(0, (latest.fleetOee - 50) / 50))
+  const needleAngle = -120 + ratio * 240
+  const lineless = cfg.svgStrokeWidth === 0
 
   return (
     <div className="relative pt-2">
@@ -226,7 +222,7 @@ const MiniPreviewConsole: React.FC<{
         <div className="flex justify-center -mb-1 relative z-10 pointer-events-none">
           <div
             className="w-14 h-4 rounded-t-2xl siren-ribs border-[2.5px] border-b-0"
-            style={{borderColor: cfg.borderColor}}
+            style={{ borderColor: cfg.borderColor }}
           />
         </div>
       )}
@@ -236,7 +232,7 @@ const MiniPreviewConsole: React.FC<{
             <span
               key={d}
               className="w-7 h-3 rounded-t-full border-[2.5px] border-b-0 bg-amber-300"
-              style={{borderColor: cfg.borderColor}}
+              style={{ borderColor: cfg.borderColor }}
             />
           ))}
         </div>
@@ -292,11 +288,11 @@ const MiniPreviewConsole: React.FC<{
             >
               <div
                 className="rounded-full p-1.5 bg-red-500 flex items-center justify-center"
-                style={{border: `2.5px solid ${cfg.borderColor}`}}
+                style={{ border: `2.5px solid ${cfg.borderColor}` }}
               >
                 <div
                   className="rounded-full bg-amber-50 p-1"
-                  style={{border: `2px solid ${cfg.borderColor}`}}
+                  style={{ border: `2px solid ${cfg.borderColor}` }}
                 >
                   <MiniDial cfg={cfg} needleAngle={needleAngle} ringColor="#FACC15" />
                 </div>
@@ -311,7 +307,7 @@ const MiniPreviewConsole: React.FC<{
                   <span
                     key={lbl}
                     className="w-6 h-6 rounded-full bg-red-500 text-white font-display text-[10px] font-bold flex items-center justify-center"
-                    style={{border: `2px solid ${cfg.borderColor}`}}
+                    style={{ border: `2px solid ${cfg.borderColor}` }}
                   >
                     {lbl}
                   </span>
@@ -319,7 +315,7 @@ const MiniPreviewConsole: React.FC<{
               </div>
               <div
                 className="rounded-xl bg-amber-300 px-1.5 py-1 text-center font-mono text-[9px] font-bold text-slate-950"
-                style={{border: `1.5px solid ${cfg.borderColor}`}}
+                style={{ border: `1.5px solid ${cfg.borderColor}` }}
               >
                 P·R·N·D {latest.fleetOee.toFixed(0)}%
               </div>
@@ -345,7 +341,7 @@ const MiniPreviewConsole: React.FC<{
             >
               <span
                 className="w-4 h-4 rounded-full bg-amber-300"
-                style={{border: `2px solid ${cfg.borderColor}`}}
+                style={{ border: `2px solid ${cfg.borderColor}` }}
               />
               <div className="flex flex-col gap-1">
                 <span className="w-12 h-1.5 rounded-full bg-amber-300 border border-slate-900" />
@@ -353,7 +349,7 @@ const MiniPreviewConsole: React.FC<{
               </div>
               <span
                 className="w-4 h-4 rounded-full bg-amber-300"
-                style={{border: `2px solid ${cfg.borderColor}`}}
+                style={{ border: `2px solid ${cfg.borderColor}` }}
               />
             </div>
           </div>
@@ -365,7 +361,7 @@ const MiniPreviewConsole: React.FC<{
               style={getStickerStyle(cfg, cfg.plateBg, -1.2)}
             >
               <MiniDial cfg={cfg} needleAngle={needleAngle} />
-              <span className="font-mono text-[9px] font-bold" style={{color: cfg.inkText}}>
+              <span className="font-mono text-[9px] font-bold" style={{ color: cfg.inkText }}>
                 {latest.fleetOee.toFixed(0)}%
               </span>
             </div>
@@ -387,7 +383,7 @@ const MiniPreviewConsole: React.FC<{
                   <div
                     key={c}
                     className="h-3 rounded-lg"
-                    style={{backgroundColor: c, border: `1.5px solid ${cfg.borderColor}`}}
+                    style={{ backgroundColor: c, border: `1.5px solid ${cfg.borderColor}` }}
                   />
                 ))}
               </div>
@@ -436,11 +432,14 @@ const MiniPreviewConsole: React.FC<{
                     <div
                       key={c}
                       className="h-3 rounded-lg"
-                      style={{backgroundColor: c, border: `1.5px solid ${cfg.borderColor}`}}
+                      style={{ backgroundColor: c, border: `1.5px solid ${cfg.borderColor}` }}
                     />
                   ))}
                 </div>
-                <div className="font-mono text-[9px] font-bold text-center" style={{color: cfg.inkText}}>
+                <div
+                  className="font-mono text-[9px] font-bold text-center"
+                  style={{ color: cfg.inkText }}
+                >
                   PRINT OFFSET
                 </div>
               </div>
@@ -465,7 +464,7 @@ const MiniPreviewConsole: React.FC<{
               <MiniDial cfg={cfg} needleAngle={needleAngle} />
               <div className="grid grid-cols-3 gap-1 w-full">
                 {['#16A34A', '#FACC15', '#EF4444'].map((c) => (
-                  <div key={c} className="h-3 rounded-full" style={{backgroundColor: c}} />
+                  <div key={c} className="h-3 rounded-full" style={{ backgroundColor: c }} />
                 ))}
               </div>
             </div>
@@ -478,23 +477,20 @@ const MiniPreviewConsole: React.FC<{
         <div className="flex justify-between px-6 -mt-1 pointer-events-none">
           <span
             className="w-9 h-3.5 rounded-b-full bg-blue-600"
-            style={{border: lineless ? 'none' : `2.5px solid ${cfg.borderColor}`, borderTop: 0}}
+            style={{ border: lineless ? 'none' : `2.5px solid ${cfg.borderColor}`, borderTop: 0 }}
           />
           <span
             className="w-9 h-3.5 rounded-b-full bg-blue-600"
-            style={{border: lineless ? 'none' : `2.5px solid ${cfg.borderColor}`, borderTop: 0}}
+            style={{ border: lineless ? 'none' : `2.5px solid ${cfg.borderColor}`, borderTop: 0 }}
           />
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export const AlternativesView: React.FC<AlternativesViewProps> = ({
-  latest,
-  onNavigateTab,
-}) => {
-  const {theme, setThemeId, allThemes} = useStationTheme();
+export const AlternativesView: React.FC<AlternativesViewProps> = ({ latest, onNavigateTab }) => {
+  const { theme, setThemeId, allThemes } = useStationTheme()
 
   return (
     <div className="flex flex-col gap-6">
@@ -520,7 +516,9 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
               Five Vintage Toy-Inspired Designs
             </h2>
             <p className="text-xs font-medium bv-muted mt-1 max-w-2xl">
-              Inspired directly by your primary dump truck and blue cockpit dashboard photos—combining bright flat primary colors, cream paper stickers, red sirens, steering-wheel bezels, roof domes, and green grilles with zero sharp edges.
+              Inspired directly by your primary dump truck and blue cockpit dashboard
+              photos—combining bright flat primary colors, cream paper stickers, red sirens,
+              steering-wheel bezels, roof domes, and green grilles with zero sharp edges.
             </p>
           </div>
         </div>
@@ -542,8 +540,8 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
       {/* 5-Design Interactive Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {allThemes.map((alt) => {
-          const isActive = alt.id === theme.id;
-          const lineless = alt.svgStrokeWidth === 0;
+          const isActive = alt.id === theme.id
+          const lineless = alt.svgStrokeWidth === 0
           return (
             <div
               key={alt.id}
@@ -553,10 +551,16 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
               <div className="flex flex-col gap-3">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <div className="font-mono text-[11px] font-bold" style={{color: alt.mutedText}}>
+                    <div
+                      className="font-mono text-[11px] font-bold"
+                      style={{ color: alt.mutedText }}
+                    >
                       Design {alt.number} · {alt.styleTag}
                     </div>
-                    <h3 className="font-display text-xl font-bold mt-0.5" style={{color: alt.inkText}}>
+                    <h3
+                      className="font-display text-xl font-bold mt-0.5"
+                      style={{ color: alt.inkText }}
+                    >
                       {alt.name}
                     </h3>
                   </div>
@@ -578,28 +582,31 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
                   </div>
                 </div>
 
-                <p className="text-xs font-medium leading-relaxed" style={{color: alt.mutedText}}>
+                <p className="text-xs font-medium leading-relaxed" style={{ color: alt.mutedText }}>
                   {alt.tagline}
                 </p>
 
                 {/* Live Mini Preview Console */}
                 <MiniPreviewConsole cfg={alt} latest={latest} />
 
-                <div className="text-[11px] leading-snug space-y-0.5" style={{color: alt.mutedText}}>
+                <div
+                  className="text-[11px] leading-snug space-y-0.5"
+                  style={{ color: alt.mutedText }}
+                >
                   <div>
-                    <span className="font-bold" style={{color: alt.inkText}}>
+                    <span className="font-bold" style={{ color: alt.inkText }}>
                       Toy Motif:
                     </span>{' '}
                     {alt.inspoNote}
                   </div>
                   <div>
-                    <span className="font-bold" style={{color: alt.inkText}}>
+                    <span className="font-bold" style={{ color: alt.inkText }}>
                       Stickers:
                     </span>{' '}
                     {alt.stickerNote}
                   </div>
                   <div>
-                    <span className="font-bold" style={{color: alt.inkText}}>
+                    <span className="font-bold" style={{ color: alt.inkText }}>
                       Layout:
                     </span>{' '}
                     {alt.layoutNote}
@@ -618,14 +625,14 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
                     border: lineless
                       ? '0px solid transparent'
                       : alt.id === StationThemeId.CreamDecal
-                      ? '2.5px solid #FEF3C7'
-                      : `2.5px solid ${alt.borderColor}`,
+                        ? '2.5px solid #FEF3C7'
+                        : `2.5px solid ${alt.borderColor}`,
                     boxShadow:
                       alt.id === StationThemeId.ScreenprintToy
                         ? `3px 3px 0 ${alt.shadowColor}`
                         : alt.id === StationThemeId.CreamDecal
-                        ? `0 0 0 2px ${alt.borderColor}`
-                        : 'none',
+                          ? `0 0 0 2px ${alt.borderColor}`
+                          : 'none',
                   }}
                 >
                   {isActive && <Check className="w-3.5 h-3.5" />}
@@ -640,9 +647,7 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
                     style={{
                       backgroundColor: alt.cardBg,
                       color: alt.inkText,
-                      border: lineless
-                        ? '0px solid transparent'
-                        : `2.5px solid ${alt.borderColor}`,
+                      border: lineless ? '0px solid transparent' : `2.5px solid ${alt.borderColor}`,
                       boxShadow:
                         alt.id === StationThemeId.ScreenprintToy
                           ? `3px 3px 0 ${alt.shadowColor}`
@@ -654,9 +659,9 @@ export const AlternativesView: React.FC<AlternativesViewProps> = ({
                 )}
               </div>
             </div>
-          );
+          )
         })}
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,0 +1,238 @@
+@import 'tailwindcss';
+@import './theme/themes.css';
+
+@theme {
+  --font-display: 'Fredoka', ui-rounded, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+@source ".";
+
+.toybox-root {
+  font-family: var(--font-sans);
+  background-color: var(--bv-canvas);
+  color: var(--bv-ink);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.steel-plate {
+  background-color: var(--bv-plate);
+}
+
+.steel-plate-dark {
+  background-color: var(--bv-plate-alt);
+}
+
+.bv-card {
+  background-color: var(--bv-card);
+}
+
+.bv-card-header {
+  background-color: var(--bv-card-header);
+}
+
+.bv-ink {
+  color: var(--bv-ink);
+}
+
+.bv-muted {
+  color: var(--bv-muted);
+}
+
+.bv-border {
+  border-color: var(--bv-border);
+}
+
+.crt-screen {
+  background-color: var(--bv-crt);
+  border: 3px solid var(--bv-border);
+  position: relative;
+}
+
+/* ============================================================================
+   BASE FLAT TOY INK PHYSICS (01 CockpitHorn & 02 DumpCab)
+   ============================================================================ */
+.cartoon-box {
+  border: 3px solid var(--bv-border);
+  box-shadow: none;
+}
+
+.cartoon-box-sm {
+  border: 2.5px solid var(--bv-border);
+  box-shadow: none;
+}
+
+.cartoon-btn {
+  border: 2.5px solid var(--bv-border);
+  box-shadow: none;
+  transition:
+    transform 110ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 140ms ease;
+}
+
+.cartoon-btn:active {
+  transform: scale(0.96);
+}
+
+/* 01 CockpitHorn: Recessed blue cockpit well + cream paper stickers */
+[data-toybox-theme='cockpit-horn'] .bv-subpanel {
+  border: 3px solid #1e293b !important;
+  box-shadow: none;
+}
+
+/* 02 DumpCab: Bold comic ink borders with warm sticker ring */
+[data-toybox-theme='dump-cab'] .bv-subpanel {
+  border: 3px solid #1e293b !important;
+  box-shadow: 0 0 0 3px #ffffff;
+}
+
+/* ============================================================================
+   03 LINELESS PRIMARY TOY BLOCKS (0px Outlines, Extra-Chubby Pill Geometry)
+   ============================================================================ */
+[data-toybox-theme='lineless-blocks'] .cartoon-box,
+[data-toybox-theme='lineless-blocks'] .cartoon-box-sm,
+[data-toybox-theme='lineless-blocks'] .cartoon-btn,
+[data-toybox-theme='lineless-blocks'] .crt-screen,
+[data-toybox-theme='lineless-blocks'] .bv-subpanel {
+  border: 0 solid transparent !important;
+  box-shadow: none !important;
+  border-radius: 2rem !important;
+}
+
+[data-toybox-theme='lineless-blocks'] .cartoon-btn {
+  border-radius: 1.25rem !important;
+}
+
+/* ============================================================================
+   04 CREAM-HALO STICKER SHEET (Double Cream + Ink Peel Rims + Slight Tilt)
+   ============================================================================ */
+[data-toybox-theme='cream-decal'] .cartoon-box {
+  border: 3px solid #fef3c7;
+  box-shadow: 0 0 0 3px #1e293b;
+}
+
+[data-toybox-theme='cream-decal'] .bv-subpanel {
+  border: 3px solid #fef3c7 !important;
+  box-shadow: 0 0 0 2.5px #1e293b;
+}
+
+[data-toybox-theme='cream-decal'] .cartoon-box-sm,
+[data-toybox-theme='cream-decal'] .cartoon-btn,
+[data-toybox-theme='cream-decal'] .crt-screen {
+  border: 2.5px solid #fef3c7;
+  box-shadow: 0 0 0 2px #1e293b;
+}
+
+[data-toybox-theme='cream-decal'] .bv-sticker-tilt-l {
+  transform: rotate(-0.8deg);
+}
+
+[data-toybox-theme='cream-decal'] .bv-sticker-tilt-r {
+  transform: rotate(0.8deg);
+}
+
+/* ============================================================================
+   05 RETRO TOYBOX SCREENPRINT (Solid Flat Offset + Candy-Stripe Trim)
+   ============================================================================ */
+[data-toybox-theme='screenprint-toy'] .cartoon-box {
+  border: 3px solid #1e293b;
+  box-shadow: 6px 6px 0 #1e293b;
+}
+
+[data-toybox-theme='screenprint-toy'] .bv-subpanel {
+  border: 3px solid #1e293b !important;
+  box-shadow: 4px 4px 0 #1e293b;
+}
+
+[data-toybox-theme='screenprint-toy'] .cartoon-box-sm,
+[data-toybox-theme='screenprint-toy'] .cartoon-btn {
+  border: 2.5px solid #1e293b;
+  box-shadow: 3px 3px 0 #1e293b;
+}
+
+[data-toybox-theme='screenprint-toy'] .cartoon-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #1e293b;
+}
+
+[data-toybox-theme='screenprint-toy'] .bv-toy-shell {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #16a34a 0px,
+    #16a34a 18px,
+    #15803d 18px,
+    #15803d 36px
+  );
+}
+
+/* ============================================================================
+   RIBBED SIREN / FLAT SUNBURST / HOSE TEXTURES & SCANNER MOTION
+   ============================================================================ */
+.siren-ribs {
+  background: repeating-linear-gradient(90deg, #ef4444 0px, #ef4444 5px, #dc2626 5px, #dc2626 9px);
+}
+
+.sunburst-orange {
+  background: repeating-conic-gradient(from -8deg, #fb923c 0deg 12deg, #f97316 12deg 24deg);
+}
+
+.sunburst-purple {
+  background: repeating-conic-gradient(from 0deg, #8b5cf6 0deg 14deg, #7c3aed 14deg 28deg);
+}
+
+.hose-ribs {
+  background: repeating-linear-gradient(90deg, #334155 0px, #64748b 4px, #1e293b 8px);
+}
+
+@keyframes laserScan {
+  0% {
+    transform: translateY(-56px);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(56px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-56px);
+    opacity: 0.9;
+  }
+}
+
+.animate-laser-scan {
+  animation: laserScan 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-laser-scan {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+   06 NIGHT SHIFT and 07 HIGH CONTRAST
+   ============================================================================ */
+[data-toybox-theme='night-shift'] .cartoon-box,
+[data-toybox-theme='night-shift'] .cartoon-box-sm,
+[data-toybox-theme='night-shift'] .cartoon-btn,
+[data-toybox-theme='night-shift'] .crt-screen {
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.25);
+}
+
+[data-toybox-theme='high-contrast'] .cartoon-box,
+[data-toybox-theme='high-contrast'] .cartoon-box-sm,
+[data-toybox-theme='high-contrast'] .cartoon-btn,
+[data-toybox-theme='high-contrast'] .crt-screen,
+[data-toybox-theme='high-contrast'] .bv-subpanel {
+  border: 4px solid #ffffff !important;
+  box-shadow: none !important;
+}
+
+[data-toybox-theme='high-contrast'] *:focus-visible {
+  outline: 4px solid #ffff00;
+  outline-offset: 2px;
+}
