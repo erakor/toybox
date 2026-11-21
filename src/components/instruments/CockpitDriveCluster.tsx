@@ -1,26 +1,26 @@
-import React from 'react';
-import {Lightbulb, Waves} from 'lucide-react';
-import {useStationTheme} from '../../context/ThemeContext';
-import {ShiftGear} from '../../types/factory';
+import React from 'react'
+import { Lightbulb, Waves } from 'lucide-react'
+import { useStationTheme } from '../../context/ThemeContext'
+import { ShiftGear } from '../../types/factory'
 
 interface CockpitDriveClusterProps {
-  shiftGear: ShiftGear;
-  onSelectGear: (gear: ShiftGear) => void;
-  bayLightsOn: boolean;
-  onToggleBayLights: () => void;
-  coolantPurgeOn: boolean;
-  onToggleCoolantPurge: () => void;
-  shiftUnits: number;
-  shiftKwh: number;
+  shiftGear: ShiftGear
+  onSelectGear: (gear: ShiftGear) => void
+  bayLightsOn: boolean
+  onToggleBayLights: () => void
+  coolantPurgeOn: boolean
+  onToggleCoolantPurge: () => void
+  shiftUnits: number
+  shiftKwh: number
 }
 
-const GEARS: {gear: ShiftGear; label: string; hint: string}[] = [
-  {gear: ShiftGear.Park, label: 'P', hint: 'Standby'},
-  {gear: ShiftGear.Reverse, label: 'R', hint: 'Regen'},
-  {gear: ShiftGear.Neutral, label: 'N', hint: 'Idle'},
-  {gear: ShiftGear.Drive, label: 'D', hint: 'Nominal'},
-  {gear: ShiftGear.Low, label: 'L', hint: 'Torque'},
-];
+const GEARS: { gear: ShiftGear; label: string; hint: string }[] = [
+  { gear: ShiftGear.Park, label: 'P', hint: 'Standby' },
+  { gear: ShiftGear.Reverse, label: 'R', hint: 'Regen' },
+  { gear: ShiftGear.Neutral, label: 'N', hint: 'Idle' },
+  { gear: ShiftGear.Drive, label: 'D', hint: 'Nominal' },
+  { gear: ShiftGear.Low, label: 'L', hint: 'Torque' },
+]
 
 export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
   shiftGear,
@@ -32,18 +32,19 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
   shiftUnits,
   shiftKwh,
 }) => {
-  const {theme} = useStationTheme();
-  const isLineless = theme.svgStrokeWidth === 0;
-  const activeIdx = Math.max(0, GEARS.findIndex((g) => g.gear === shiftGear));
-  const unitDigits = String(shiftUnits).padStart(6, '0').split('');
+  const { theme } = useStationTheme()
+  const isLineless = theme.svgStrokeWidth === 0
+  const activeIdx = Math.max(
+    0,
+    GEARS.findIndex((g) => g.gear === shiftGear),
+  )
+  const unitDigits = String(shiftUnits).padStart(6, '0').split('')
 
   return (
     <div className="flex flex-col justify-between gap-3.5 h-full">
       <div className="flex items-center justify-between gap-2">
         <div>
-          <h3 className="font-display text-lg font-bold bv-ink">
-            Gear Shifter, L/W & Odometer
-          </h3>
+          <h3 className="font-display text-lg font-bold bv-ink">Gear Shifter, L/W & Odometer</h3>
           <p className="text-xs font-medium bv-muted">
             PRNDL drive selector · Bay lights & coolant purge
           </p>
@@ -59,7 +60,7 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
         <div className="bg-[#FEF3C7] cartoon-box-sm rounded-2xl p-3 flex items-center gap-3">
           <div className="flex flex-col gap-1 flex-1">
             {GEARS.map((item) => {
-              const selected = item.gear === shiftGear;
+              const selected = item.gear === shiftGear
               return (
                 <button
                   key={item.gear}
@@ -80,7 +81,7 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
                     {item.hint}
                   </span>
                 </button>
-              );
+              )
             })}
           </div>
 
@@ -176,5 +177,5 @@ export const CockpitDriveCluster: React.FC<CockpitDriveClusterProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

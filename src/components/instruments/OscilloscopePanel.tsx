@@ -1,14 +1,14 @@
-import React from 'react';
-import {useStationTheme} from '../../context/ThemeContext';
-import {BreakerChannel} from '../../types/factory';
+import React from 'react'
+import { useStationTheme } from '../../context/ThemeContext'
+import { type BreakerChannel } from '../../types/factory'
 
 interface OscilloscopePanelProps {
-  gridHz: number;
-  busVoltageV: number;
-  harmonicDistortionPct: number;
-  tick: number;
-  breakers: BreakerChannel[];
-  onToggleBreaker: (machineId: string) => void;
+  gridHz: number
+  busVoltageV: number
+  harmonicDistortionPct: number
+  tick: number
+  breakers: BreakerChannel[]
+  onToggleBreaker: (machineId: string) => void
 }
 
 export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
@@ -19,20 +19,18 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
   breakers,
   onToggleBreaker,
 }) => {
-  const {theme} = useStationTheme();
-  const points: string[] = [];
-  const width = 240;
-  const height = 76;
-  const amp = 18 + harmonicDistortionPct * 2.2;
-  const freq = 0.14 + (gridHz - 60) * 0.2;
+  const { theme } = useStationTheme()
+  const points: string[] = []
+  const width = 240
+  const height = 76
+  const amp = 18 + harmonicDistortionPct * 2.2
+  const freq = 0.14 + (gridHz - 60) * 0.2
 
   for (let x = 0; x <= width; x += 4) {
-    const phase = x * freq + tick * 0.9;
+    const phase = x * freq + tick * 0.9
     const y =
-      height / 2 +
-      Math.sin(phase) * amp +
-      Math.sin(phase * 3) * (harmonicDistortionPct * 1.1);
-    points.push(`${x},${y.toFixed(1)}`);
+      height / 2 + Math.sin(phase) * amp + Math.sin(phase * 3) * (harmonicDistortionPct * 1.1)
+    points.push(`${x},${y.toFixed(1)}`)
   }
 
   return (
@@ -55,7 +53,7 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3 items-center steel-plate-dark cartoon-box-sm rounded-2xl p-3">
         <div
           className="crt-screen rounded-2xl p-2.5 relative overflow-hidden"
-          style={{backgroundColor: '#0B2615'}}
+          style={{ backgroundColor: '#0B2615' }}
         >
           <svg viewBox="0 0 240 76" className="w-full h-20">
             {[19, 38, 57].map((y) => (
@@ -82,7 +80,7 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
                 strokeLinecap="round"
               />
             ))}
-            {Array.from({length: 13}, (_, i) => (
+            {Array.from({ length: 13 }, (_, i) => (
               <line
                 key={i}
                 x1={i * 20}
@@ -111,8 +109,8 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
 
         <div className="flex sm:flex-col items-center justify-center gap-3 px-1">
           {[
-            {label: 'PH-A', pct: Math.min(98, 72 + harmonicDistortionPct * 4)},
-            {label: 'PH-B', pct: Math.min(96, 68 - harmonicDistortionPct * 2)},
+            { label: 'PH-A', pct: Math.min(98, 72 + harmonicDistortionPct * 4) },
+            { label: 'PH-B', pct: Math.min(96, 68 - harmonicDistortionPct * 2) },
           ].map((dial) => (
             <div key={dial.label} className="flex items-center gap-2">
               <svg viewBox="0 0 44 44" className="w-10 h-10">
@@ -160,9 +158,7 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
               aria-pressed={b.closed}
               title={`Toggle ${b.label} (${b.closed ? 'Online' : 'Isolated'})`}
               className={`cartoon-btn flex flex-col items-center p-2 rounded-2xl cursor-pointer ${
-                b.closed
-                  ? 'bg-slate-100 hover:bg-amber-100'
-                  : 'bg-slate-400 hover:bg-slate-300'
+                b.closed ? 'bg-slate-100 hover:bg-amber-100' : 'bg-slate-400 hover:bg-slate-300'
               }`}
             >
               <div className="w-7 h-12 rounded-xl bg-slate-950 p-1 flex flex-col justify-between border border-slate-950">
@@ -188,5 +184,5 @@ export const OscilloscopePanel: React.FC<OscilloscopePanelProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

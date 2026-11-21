@@ -1,46 +1,47 @@
-export enum StationThemeId {
-  CockpitHorn = 'cockpit-horn',
-  DumpCab = 'dump-cab',
-  LinelessBlocks = 'lineless-blocks',
-  CreamDecal = 'cream-decal',
-  ScreenprintToy = 'screenprint-toy',
-}
+export const StationThemeId = {
+  CockpitHorn: 'cockpit-horn',
+  DumpCab: 'dump-cab',
+  LinelessBlocks: 'lineless-blocks',
+  CreamDecal: 'cream-decal',
+  ScreenprintToy: 'screenprint-toy',
+} as const
+export type StationThemeId = (typeof StationThemeId)[keyof typeof StationThemeId]
 
 export interface StationThemeConfig {
-  id: StationThemeId;
-  number: string;
-  name: string;
-  styleTag: string;
-  tagline: string;
-  inspoNote: string;
-  stickerNote: string;
-  layoutNote: string;
+  id: StationThemeId
+  number: string
+  name: string
+  styleTag: string
+  tagline: string
+  inspoNote: string
+  stickerNote: string
+  layoutNote: string
   // Shared bright primary + cream-paper toy palette inspired by the two photos
-  canvasBg: string;
-  sidebarBg: string;
-  sidebarHeaderBg: string;
-  topBarBg: string;
-  bezelBg: string;
-  nameplateBg: string;
-  plateBg: string;
-  plateAltBg: string;
-  cardBg: string;
-  cardHeaderBg: string;
-  crtBg: string;
-  borderColor: string;
-  shadowColor: string;
-  inkText: string;
-  mutedText: string;
-  accentBg: string;
-  accentText: string;
-  kpiYellowBg: string;
-  kpiBlueBg: string;
-  pipeLight: string;
-  pipeLavender: string;
-  pipeRed: string;
-  isDarkSurface: boolean;
-  svgStrokeWidth: number;
-  swatches: [string, string, string, string];
+  canvasBg: string
+  sidebarBg: string
+  sidebarHeaderBg: string
+  topBarBg: string
+  bezelBg: string
+  nameplateBg: string
+  plateBg: string
+  plateAltBg: string
+  cardBg: string
+  cardHeaderBg: string
+  crtBg: string
+  borderColor: string
+  shadowColor: string
+  inkText: string
+  mutedText: string
+  accentBg: string
+  accentText: string
+  kpiYellowBg: string
+  kpiBlueBg: string
+  pipeLight: string
+  pipeLavender: string
+  pipeRed: string
+  isDarkSurface: boolean
+  svgStrokeWidth: number
+  swatches: [string, string, string, string]
 }
 
 const TOY_BASE_TOKENS = {
@@ -62,7 +63,7 @@ const TOY_BASE_TOKENS = {
   pipeLavender: '#FACC15',
   pipeRed: '#EF4444',
   isDarkSurface: false,
-} as const;
+} as const
 
 export const STATION_THEMES: StationThemeConfig[] = [
   {
@@ -163,4 +164,4 @@ export const STATION_THEMES: StationThemeConfig[] = [
     svgStrokeWidth: 3.2,
     swatches: ['#16A34A', '#FACC15', '#EF4444', '#2B99E8'],
   },
-];
+]

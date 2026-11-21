@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {TelemetryPoint} from '../../types/factory';
+import React, { useState } from 'react'
+import { type TelemetryPoint } from '../../types/factory'
 
 interface EnergyFlowChartProps {
-  history: TelemetryPoint[];
-  peakThresholdKw: number;
-  heightClass?: string;
+  history: TelemetryPoint[]
+  peakThresholdKw: number
+  heightClass?: string
 }
 
 export const EnergyFlowChart: React.FC<EnergyFlowChartProps> = ({
@@ -12,42 +12,44 @@ export const EnergyFlowChart: React.FC<EnergyFlowChartProps> = ({
   peakThresholdKw,
   heightClass = 'h-56',
 }) => {
-  const [hoverIdx, setHoverIdx] = useState<number | null>(null);
+  const [hoverIdx, setHoverIdx] = useState<number | null>(null)
 
   if (history.length === 0) {
     return (
-      <div className={`${heightClass} flex items-center justify-center text-sm text-slate-700 font-medium`}>
+      <div
+        className={`${heightClass} flex items-center justify-center text-sm text-slate-700 font-medium`}
+      >
         No telemetry samples recorded yet.
       </div>
-    );
+    )
   }
 
-  const w = 640;
-  const h = 210;
-  const padL = 44;
-  const padR = 16;
-  const padT = 16;
-  const padB = 28;
-  const innerW = w - padL - padR;
-  const innerH = h - padT - padB;
+  const w = 640
+  const h = 210
+  const padL = 44
+  const padR = 16
+  const padT = 16
+  const padB = 28
+  const innerW = w - padL - padR
+  const innerH = h - padT - padB
 
-  const maxY = Math.max(560, peakThresholdKw + 40, ...history.map((p) => p.totalPowerKw + 20));
-  const minY = 0;
+  const maxY = Math.max(560, peakThresholdKw + 40, ...history.map((p) => p.totalPowerKw + 20))
+  const minY = 0
 
-  const xFor = (idx: number) =>
-    padL + (idx / Math.max(1, history.length - 1)) * innerW;
-  const yFor = (val: number) =>
-    padT + innerH - ((val - minY) / (maxY - minY)) * innerH;
+  const xFor = (idx: number) => padL + (idx / Math.max(1, history.length - 1)) * innerW
+  const yFor = (val: number) => padT + innerH - ((val - minY) / (maxY - minY)) * innerH
 
-  const powerPoints = history.map((p, i) => `${xFor(i).toFixed(1)},${yFor(p.totalPowerKw).toFixed(1)}`);
-  const regenPoints = history.map((p, i) => `${xFor(i).toFixed(1)},${yFor(p.regenKw).toFixed(1)}`);
+  const powerPoints = history.map(
+    (p, i) => `${xFor(i).toFixed(1)},${yFor(p.totalPowerKw).toFixed(1)}`,
+  )
+  const regenPoints = history.map((p, i) => `${xFor(i).toFixed(1)},${yFor(p.regenKw).toFixed(1)}`)
 
-  const powerArea = `M ${xFor(0).toFixed(1)},${(padT + innerH).toFixed(1)} L ${powerPoints.join(' L ')} L ${xFor(history.length - 1).toFixed(1)},${(padT + innerH).toFixed(1)} Z`;
-  const regenArea = `M ${xFor(0).toFixed(1)},${(padT + innerH).toFixed(1)} L ${regenPoints.join(' L ')} L ${xFor(history.length - 1).toFixed(1)},${(padT + innerH).toFixed(1)} Z`;
+  const powerArea = `M ${xFor(0).toFixed(1)},${(padT + innerH).toFixed(1)} L ${powerPoints.join(' L ')} L ${xFor(history.length - 1).toFixed(1)},${(padT + innerH).toFixed(1)} Z`
+  const regenArea = `M ${xFor(0).toFixed(1)},${(padT + innerH).toFixed(1)} L ${regenPoints.join(' L ')} L ${xFor(history.length - 1).toFixed(1)},${(padT + innerH).toFixed(1)} Z`
 
-  const thresholdY = yFor(peakThresholdKw);
-  const activePoint = hoverIdx !== null ? history[hoverIdx] : history[history.length - 1];
-  const activeX = hoverIdx !== null ? xFor(hoverIdx) : xFor(history.length - 1);
+  const thresholdY = yFor(peakThresholdKw)
+  const activePoint = hoverIdx !== null ? history[hoverIdx] : history[history.length - 1]
+  const activeX = hoverIdx !== null ? xFor(hoverIdx) : xFor(history.length - 1)
 
   return (
     <div className="flex flex-col gap-3">
@@ -75,7 +77,9 @@ export const EnergyFlowChart: React.FC<EnergyFlowChartProps> = ({
       </div>
 
       {/* Dark CRT Plot */}
-      <div className={`relative w-full ${heightClass} crt-screen rounded-2xl p-2 shadow-[0_3px_0_#0F172A]`}>
+      <div
+        className={`relative w-full ${heightClass} crt-screen rounded-2xl p-2 shadow-[0_3px_0_#0F172A]`}
+      >
         <svg
           viewBox={`0 0 ${w} ${h}`}
           className="w-full h-full overflow-visible"
@@ -93,7 +97,7 @@ export const EnergyFlowChart: React.FC<EnergyFlowChartProps> = ({
           </defs>
 
           {[0, 150, 300, 450].map((val) => {
-            const y = yFor(val);
+            const y = yFor(val)
             return (
               <g key={val}>
                 <line
@@ -116,7 +120,7 @@ export const EnergyFlowChart: React.FC<EnergyFlowChartProps> = ({
                   {val}
                 </text>
               </g>
-            );
+            )
           })}
 
           <line
@@ -191,7 +195,7 @@ export const EnergyFlowChart: React.FC<EnergyFlowChartProps> = ({
           ))}
 
           {history.map((_, idx) => {
-            const colWidth = innerW / history.length;
+            const colWidth = innerW / history.length
             return (
               <rect
                 key={idx}
@@ -202,10 +206,10 @@ export const EnergyFlowChart: React.FC<EnergyFlowChartProps> = ({
                 fill="transparent"
                 onMouseEnter={() => setHoverIdx(idx)}
               />
-            );
+            )
           })}
         </svg>
       </div>
     </div>
-  );
-};
+  )
+}

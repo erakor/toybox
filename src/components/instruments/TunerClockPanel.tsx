@@ -1,15 +1,15 @@
-import React from 'react';
-import {useStationTheme} from '../../context/ThemeContext';
+import React from 'react'
+import { useStationTheme } from '../../context/ThemeContext'
 
 interface TunerClockPanelProps {
-  shiftElapsedSec: number;
-  peakThresholdKw: number;
-  onChangePeakThreshold: (val: number) => void;
-  harmonicTrim: number;
-  onChangeHarmonicTrim: (val: number) => void;
-  surgeActive: boolean;
-  criticalCount: number;
-  bayLightsOn: boolean;
+  shiftElapsedSec: number
+  peakThresholdKw: number
+  onChangePeakThreshold: (val: number) => void
+  harmonicTrim: number
+  onChangeHarmonicTrim: (val: number) => void
+  surgeActive: boolean
+  criticalCount: number
+  bayLightsOn: boolean
 }
 
 export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
@@ -22,29 +22,27 @@ export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
   criticalCount,
   bayLightsOn,
 }) => {
-  const {theme} = useStationTheme();
-  const isLineless = theme.svgStrokeWidth === 0;
+  const { theme } = useStationTheme()
+  const isLineless = theme.svgStrokeWidth === 0
 
-  const hours = Math.floor((shiftElapsedSec / 3600) % 12);
-  const mins = Math.floor((shiftElapsedSec / 60) % 60);
-  const secs = shiftElapsedSec % 60;
-  const minAngle = mins * 6;
-  const hourAngle = hours * 30 + mins * 0.5;
-  const secAngle = secs * 6;
+  const hours = Math.floor((shiftElapsedSec / 3600) % 12)
+  const mins = Math.floor((shiftElapsedSec / 60) % 60)
+  const secs = shiftElapsedSec % 60
+  const minAngle = mins * 6
+  const hourAngle = hours * 30 + mins * 0.5
+  const secAngle = secs * 6
 
   const formattedShift = `${String(Math.floor(shiftElapsedSec / 3600)).padStart(2, '0')}:${String(
-    mins
-  ).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    mins,
+  ).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
 
-  const tunerPercent = Math.min(100, Math.max(0, ((peakThresholdKw - 360) / 240) * 100));
+  const tunerPercent = Math.min(100, Math.max(0, ((peakThresholdKw - 360) / 240) * 100))
 
   return (
     <div className="flex flex-col justify-between gap-3.5 h-full">
       <div className="flex items-center justify-between gap-2">
         <div>
-          <h3 className="font-display text-lg font-bold bv-ink">
-            Shift Clock, Tuner & Lamps
-          </h3>
+          <h3 className="font-display text-lg font-bold bv-ink">Shift Clock, Tuner & Lamps</h3>
           <p className="text-xs font-medium bv-muted">
             Peak threshold dial · Harmonic filter & grid sync lights
           </p>
@@ -56,14 +54,14 @@ export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
             className={`w-4 h-4 rounded-full transition-colors ${
               criticalCount > 0 ? 'bg-red-500' : bayLightsOn ? 'bg-amber-300' : 'bg-amber-100'
             }`}
-            style={{border: isLineless ? 'none' : `2px solid ${theme.borderColor}`}}
+            style={{ border: isLineless ? 'none' : `2px solid ${theme.borderColor}` }}
             title="Primary Bus Status Lamp"
           />
           <span
             className={`w-4 h-4 rounded-full transition-colors ${
               surgeActive ? 'bg-red-500' : 'bg-amber-300'
             }`}
-            style={{border: isLineless ? 'none' : `2px solid ${theme.borderColor}`}}
+            style={{ border: isLineless ? 'none' : `2px solid ${theme.borderColor}` }}
             title="Surge Sync Lamp"
           />
         </div>
@@ -83,7 +81,7 @@ export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
               strokeWidth={isLineless ? 0 : 3}
             />
             {[0, 90, 180, 270].map((deg) => {
-              const rad = ((deg - 90) * Math.PI) / 180;
+              const rad = ((deg - 90) * Math.PI) / 180
               return (
                 <circle
                   key={deg}
@@ -92,15 +90,15 @@ export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
                   r="2.8"
                   fill="#0F172A"
                 />
-              );
+              )
             })}
-            <g style={{transform: `rotate(${hourAngle}deg)`, transformOrigin: '40px 40px'}}>
+            <g style={{ transform: `rotate(${hourAngle}deg)`, transformOrigin: '40px 40px' }}>
               <rect x="37.5" y="21" width="5" height="20" rx="2.5" fill="#1E293B" />
             </g>
-            <g style={{transform: `rotate(${minAngle}deg)`, transformOrigin: '40px 40px'}}>
+            <g style={{ transform: `rotate(${minAngle}deg)`, transformOrigin: '40px 40px' }}>
               <rect x="38" y="13" width="4" height="28" rx="2" fill="#2B99E8" />
             </g>
-            <g style={{transform: `rotate(${secAngle}deg)`, transformOrigin: '40px 40px'}}>
+            <g style={{ transform: `rotate(${secAngle}deg)`, transformOrigin: '40px 40px' }}>
               <rect x="39" y="12" width="2" height="30" rx="1" fill="#EF4444" />
             </g>
             <circle cx="40" cy="40" r="4" fill="#EF4444" />
@@ -124,7 +122,7 @@ export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
             <div className="h-3 rounded-full bg-slate-800 relative overflow-hidden p-0.5">
               <div
                 className="h-full rounded-full bg-amber-300 transition-all duration-200"
-                style={{width: `${tunerPercent}%`}}
+                style={{ width: `${tunerPercent}%` }}
               />
               <span
                 className="w-3 h-3 rounded-full bg-red-500 absolute top-0 transition-all duration-200"
@@ -175,5 +173,5 @@ export const TunerClockPanel: React.FC<TunerClockPanelProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

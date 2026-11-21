@@ -1,37 +1,31 @@
-import React from 'react';
-import {useStationTheme} from '../../context/ThemeContext';
+import React from 'react'
+import { useStationTheme } from '../../context/ThemeContext'
 
 interface AnalogDialGaugeProps {
-  label: string;
-  value: number;
-  min: number;
-  max: number;
-  unit: string;
-  warningStart?: number;
-  dangerStart?: number;
-  variant?: 'white' | 'yellow';
-  size?: 'sm' | 'md' | 'lg';
+  label: string
+  value: number
+  min: number
+  max: number
+  unit: string
+  warningStart?: number
+  dangerStart?: number
+  variant?: 'white' | 'yellow'
+  size?: 'sm' | 'md' | 'lg'
 }
 
 function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
-  const rad = ((angleDeg - 90) * Math.PI) / 180;
+  const rad = ((angleDeg - 90) * Math.PI) / 180
   return {
     x: cx + r * Math.cos(rad),
     y: cy + r * Math.sin(rad),
-  };
+  }
 }
 
-function describeArc(
-  cx: number,
-  cy: number,
-  r: number,
-  startAngle: number,
-  endAngle: number
-) {
-  const start = polarToCartesian(cx, cy, r, endAngle);
-  const end = polarToCartesian(cx, cy, r, startAngle);
-  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
-  return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`;
+function describeArc(cx: number, cy: number, r: number, startAngle: number, endAngle: number) {
+  const start = polarToCartesian(cx, cy, r, endAngle)
+  const end = polarToCartesian(cx, cy, r, startAngle)
+  const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1'
+  return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 0 ${end.x} ${end.y}`
 }
 
 export const AnalogDialGauge: React.FC<AnalogDialGaugeProps> = ({
@@ -45,40 +39,35 @@ export const AnalogDialGauge: React.FC<AnalogDialGaugeProps> = ({
   variant = 'white',
   size = 'md',
 }) => {
-  const {theme} = useStationTheme();
-  const clamped = Math.min(max, Math.max(min, value));
-  const ratio = (clamped - min) / (max - min || 1);
-  const startAngle = -135;
-  const endAngle = 135;
-  const needleAngle = startAngle + ratio * (endAngle - startAngle);
+  const { theme } = useStationTheme()
+  const clamped = Math.min(max, Math.max(min, value))
+  const ratio = (clamped - min) / (max - min || 1)
+  const startAngle = -135
+  const endAngle = 135
+  const needleAngle = startAngle + ratio * (endAngle - startAngle)
 
-  const isYellow = variant === 'yellow';
-  const faceFill = isYellow ? '#FACC15' : '#FFFFFF';
-  const outerRimFill = isYellow ? '#1E293B' : '#CBD5E1';
+  const isYellow = variant === 'yellow'
+  const faceFill = isYellow ? '#FACC15' : '#FFFFFF'
+  const outerRimFill = isYellow ? '#1E293B' : '#CBD5E1'
 
-  const dimensions =
-    size === 'sm' ? 'w-24 h-24' : size === 'lg' ? 'w-36 h-36' : 'w-28 h-28';
+  const dimensions = size === 'sm' ? 'w-24 h-24' : size === 'lg' ? 'w-36 h-36' : 'w-28 h-28'
 
   const warnAngle =
-    warningStart !== undefined
-      ? startAngle + ((warningStart - min) / (max - min)) * 270
-      : null;
+    warningStart !== undefined ? startAngle + ((warningStart - min) / (max - min)) * 270 : null
   const dangerAngle =
-    dangerStart !== undefined
-      ? startAngle + ((dangerStart - min) / (max - min)) * 270
-      : null;
+    dangerStart !== undefined ? startAngle + ((dangerStart - min) / (max - min)) * 270 : null
 
-  const ticks = Array.from({length: 19}, (_, i) => {
-    const tAngle = startAngle + (i / 18) * 270;
-    const isMajor = i % 3 === 0;
-    const outer = polarToCartesian(60, 60, 44, tAngle);
-    const inner = polarToCartesian(60, 60, isMajor ? 34 : 39, tAngle);
-    return {outer, inner, isMajor, key: i};
-  });
+  const ticks = Array.from({ length: 19 }, (_, i) => {
+    const tAngle = startAngle + (i / 18) * 270
+    const isMajor = i % 3 === 0
+    const outer = polarToCartesian(60, 60, 44, tAngle)
+    const inner = polarToCartesian(60, 60, isMajor ? 34 : 39, tAngle)
+    return { outer, inner, isMajor, key: i }
+  })
 
   const isAlert =
     (dangerStart !== undefined && value >= dangerStart) ||
-    (warningStart !== undefined && value >= warningStart);
+    (warningStart !== undefined && value >= warningStart)
 
   return (
     <div className="flex flex-col items-center gap-1.5 select-none">
@@ -197,16 +186,12 @@ export const AnalogDialGauge: React.FC<AnalogDialGaugeProps> = ({
         <div className="text-xs font-bold bv-ink leading-tight">{label}</div>
         <div
           className={`font-mono text-xs font-semibold tabular-nums ${
-            isAlert
-              ? theme.isDarkSurface
-                ? 'text-rose-300'
-                : 'text-red-700'
-              : 'bv-muted'
+            isAlert ? (theme.isDarkSurface ? 'text-rose-300' : 'text-red-700') : 'bv-muted'
           }`}
         >
           {Number.isInteger(value) ? value : value.toFixed(1)} {unit}
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

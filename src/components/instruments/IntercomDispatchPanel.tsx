@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {Radio, Send} from 'lucide-react';
-import {useStationTheme} from '../../context/ThemeContext';
-import {DispatchLogEntry, MachineUnit} from '../../types/factory';
+import React, { useState } from 'react'
+import { Radio, Send } from 'lucide-react'
+import { useStationTheme } from '../../context/ThemeContext'
+import { type DispatchLogEntry, type MachineUnit } from '../../types/factory'
 
 interface IntercomDispatchPanelProps {
-  machines: MachineUnit[];
-  dispatchLogs: DispatchLogEntry[];
-  onSendDispatch: (machineId: string, note: string) => void;
+  machines: MachineUnit[]
+  dispatchLogs: DispatchLogEntry[]
+  onSendDispatch: (machineId: string, note: string) => void
 }
 
 export const IntercomDispatchPanel: React.FC<IntercomDispatchPanelProps> = ({
@@ -14,23 +14,21 @@ export const IntercomDispatchPanel: React.FC<IntercomDispatchPanelProps> = ({
   dispatchLogs,
   onSendDispatch,
 }) => {
-  const {theme} = useStationTheme();
-  const isLineless = theme.svgStrokeWidth === 0;
-  const [targetId, setTargetId] = useState<string>(machines[2]?.id ?? machines[0]?.id ?? 'hg-03');
-  const [note, setNote] = useState<string>('Inspect bay seals & alignment');
+  const { theme } = useStationTheme()
+  const isLineless = theme.svgStrokeWidth === 0
+  const [targetId, setTargetId] = useState<string>(machines[2]?.id ?? machines[0]?.id ?? 'hg-03')
+  const [note, setNote] = useState<string>('Inspect bay seals & alignment')
 
   const handleDispatch = () => {
-    const trimmed = note.trim() || 'Routine inspection dispatched';
-    onSendDispatch(targetId, trimmed);
-  };
+    const trimmed = note.trim() || 'Routine inspection dispatched'
+    onSendDispatch(targetId, trimmed)
+  }
 
   return (
     <div className="flex flex-col justify-between gap-3.5 h-full">
       <div className="flex items-center justify-between gap-2">
         <div>
-          <h3 className="font-display text-lg font-bold bv-ink">
-            MIKE Floor Intercom & Dispatch
-          </h3>
+          <h3 className="font-display text-lg font-bold bv-ink">MIKE Floor Intercom & Dispatch</h3>
           <p className="text-xs font-medium bv-muted">
             Page bay technicians directly from the cockpit mic
           </p>
@@ -160,5 +158,5 @@ export const IntercomDispatchPanel: React.FC<IntercomDispatchPanelProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

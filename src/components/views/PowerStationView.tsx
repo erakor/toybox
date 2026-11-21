@@ -1,65 +1,65 @@
-import React from 'react';
-import {AlertTriangle, ArrowRight, CheckCircle2, Palette, Volume2, Wrench} from 'lucide-react';
-import {useStationTheme} from '../../context/ThemeContext';
+import React from 'react'
+import { AlertTriangle, ArrowRight, CheckCircle2, Palette, Volume2, Wrench } from 'lucide-react'
+import { useStationTheme } from '../../context/ThemeContext'
 import {
   AlertSeverity,
-  BreakerChannel,
+  type BreakerChannel,
   DashboardTab,
-  DispatchLogEntry,
+  type DispatchLogEntry,
   MachineStatus,
-  MachineUnit,
-  MaintenanceAlert,
-  PowerPreset,
-  ShiftGear,
-  TelemetryPoint,
-} from '../../types/factory';
-import {StationThemeId} from '../../types/theme';
-import {AnalogDialGauge} from '../instruments/AnalogDialGauge';
-import {BatterySunburstCore} from '../instruments/BatterySunburstCore';
-import {CockpitDriveCluster} from '../instruments/CockpitDriveCluster';
-import {HopperCrewPanel} from '../instruments/HopperCrewPanel';
-import {IntercomDispatchPanel} from '../instruments/IntercomDispatchPanel';
-import {MatrixKeypad} from '../instruments/MatrixKeypad';
-import {OscilloscopePanel} from '../instruments/OscilloscopePanel';
-import {SilhouetteScanner} from '../instruments/SilhouetteScanner';
-import {TunerClockPanel} from '../instruments/TunerClockPanel';
-import {EnergyFlowChart} from '../charts/EnergyFlowChart';
+  type MachineUnit,
+  type MaintenanceAlert,
+  type PowerPreset,
+  type ShiftGear,
+  type TelemetryPoint,
+} from '../../types/factory'
+import { StationThemeId } from '../../types/theme'
+import { AnalogDialGauge } from '../instruments/AnalogDialGauge'
+import { BatterySunburstCore } from '../instruments/BatterySunburstCore'
+import { CockpitDriveCluster } from '../instruments/CockpitDriveCluster'
+import { HopperCrewPanel } from '../instruments/HopperCrewPanel'
+import { IntercomDispatchPanel } from '../instruments/IntercomDispatchPanel'
+import { MatrixKeypad } from '../instruments/MatrixKeypad'
+import { OscilloscopePanel } from '../instruments/OscilloscopePanel'
+import { SilhouetteScanner } from '../instruments/SilhouetteScanner'
+import { TunerClockPanel } from '../instruments/TunerClockPanel'
+import { EnergyFlowChart } from '../charts/EnergyFlowChart'
 
 interface PowerStationViewProps {
-  machines: MachineUnit[];
-  latest: TelemetryPoint;
-  history: TelemetryPoint[];
-  breakers: BreakerChannel[];
-  openAlerts: MaintenanceAlert[];
-  activePreset: PowerPreset;
-  shiftGear: ShiftGear;
-  loadBias: number;
-  harmonicTrim: number;
-  surgeActive: boolean;
-  bayLightsOn: boolean;
-  coolantPurgeOn: boolean;
-  hornActive: boolean;
-  peakThresholdKw: number;
-  shiftKwh: number;
-  shiftUnits: number;
-  hopperPct: number;
-  completedBatches: number;
-  shiftElapsedSec: number;
-  dispatchLogs: DispatchLogEntry[];
-  onSelectPreset: (p: PowerPreset) => void;
-  onSelectGear: (gear: ShiftGear) => void;
-  onChangeLoadBias: (val: number) => void;
-  onChangePeakThreshold: (val: number) => void;
-  onChangeHarmonicTrim: (val: number) => void;
-  onToggleBreaker: (machineId: string) => void;
-  onToggleBayLights: () => void;
-  onToggleCoolantPurge: () => void;
-  onToggleSurge: () => void;
-  onTipHopperBatch: () => void;
-  onHonkHorn: () => void;
-  onSendDispatch: (machineId: string, note: string) => void;
-  onResolveAlert: (id: string) => void;
-  onNavigateTab: (tab: DashboardTab) => void;
+  machines: MachineUnit[]
+  latest: TelemetryPoint
+  history: TelemetryPoint[]
+  breakers: BreakerChannel[]
+  openAlerts: MaintenanceAlert[]
+  activePreset: PowerPreset
+  shiftGear: ShiftGear
+  loadBias: number
+  harmonicTrim: number
+  surgeActive: boolean
+  bayLightsOn: boolean
+  coolantPurgeOn: boolean
+  hornActive: boolean
+  peakThresholdKw: number
+  shiftKwh: number
+  shiftUnits: number
+  hopperPct: number
+  completedBatches: number
+  shiftElapsedSec: number
+  dispatchLogs: DispatchLogEntry[]
+  onSelectPreset: (p: PowerPreset) => void
+  onSelectGear: (gear: ShiftGear) => void
+  onChangeLoadBias: (val: number) => void
+  onChangePeakThreshold: (val: number) => void
+  onChangeHarmonicTrim: (val: number) => void
+  onToggleBreaker: (machineId: string) => void
+  onToggleBayLights: () => void
+  onToggleCoolantPurge: () => void
+  onToggleSurge: () => void
+  onTipHopperBatch: () => void
+  onHonkHorn: () => void
+  onSendDispatch: (machineId: string, note: string) => void
+  onResolveAlert: (id: string) => void
+  onNavigateTab: (tab: DashboardTab) => void
 }
 
 export const PowerStationView: React.FC<PowerStationViewProps> = ({
@@ -98,25 +98,25 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
   onResolveAlert,
   onNavigateTab,
 }) => {
-  const {theme, setThemeId, allThemes} = useStationTheme();
-  const scannerMachine = machines.find((m) => m.id === 'mn-06') ?? machines[0];
-  const primaryCore = machines.find((m) => m.id === 'ps-01') ?? machines[0];
-  const criticalCount = openAlerts.filter((a) => a.severity === AlertSeverity.Critical).length;
-  const activeCount = machines.filter((m) => m.active).length;
+  const { theme, setThemeId, allThemes } = useStationTheme()
+  const scannerMachine = machines.find((m) => m.id === 'mn-06') ?? machines[0]
+  const primaryCore = machines.find((m) => m.id === 'ps-01') ?? machines[0]
+  const criticalCount = openAlerts.filter((a) => a.severity === AlertSeverity.Critical).length
+  const activeCount = machines.filter((m) => m.active).length
 
-  const isLineless = theme.id === StationThemeId.LinelessBlocks;
-  const isCockpit = theme.id === StationThemeId.CockpitHorn;
-  const isDumpCab = theme.id === StationThemeId.DumpCab;
-  const sirenLit = criticalCount > 0 || hornActive;
-  const subpanelFrame = `bv-subpanel rounded-2xl border-[3px] bv-border`;
+  const isLineless = theme.id === StationThemeId.LinelessBlocks
+  const isCockpit = theme.id === StationThemeId.CockpitHorn
+  const isDumpCab = theme.id === StationThemeId.DumpCab
+  const sirenLit = criticalCount > 0 || hornActive
+  const subpanelFrame = `bv-subpanel rounded-2xl border-[3px] bv-border`
 
   const spectralBars = [
-    {label: 'Core', value: machines[0]?.powerKw ?? 0, color: 'bg-blue-500'},
-    {label: 'Press', value: machines[1]?.powerKw ?? 0, color: 'bg-cyan-400'},
-    {label: 'Pump', value: machines[2]?.powerKw ?? 0, color: 'bg-pink-400'},
-    {label: 'Rotor', value: machines[3]?.powerKw ?? 0, color: 'bg-purple-500'},
-  ];
-  const maxBarKw = 150;
+    { label: 'Core', value: machines[0]?.powerKw ?? 0, color: 'bg-blue-500' },
+    { label: 'Press', value: machines[1]?.powerKw ?? 0, color: 'bg-cyan-400' },
+    { label: 'Pump', value: machines[2]?.powerKw ?? 0, color: 'bg-pink-400' },
+    { label: 'Rotor', value: machines[3]?.powerKw ?? 0, color: 'bg-purple-500' },
+  ]
+  const maxBarKw = 150
 
   /* Reusable Core + Toy Instrument Pods */
   const matrixPod = (
@@ -128,7 +128,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         onChangeLoadBias={onChangeLoadBias}
       />
     </div>
-  );
+  )
 
   const dualGaugePod = isCockpit ? (
     <div className={`${subpanelFrame} bg-sky-100 p-4 h-full flex items-center justify-center`}>
@@ -157,9 +157,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
           }`}
         >
           <Volume2 className="w-4 h-4" />
-          <span className="font-display text-[10px] font-bold leading-none mt-0.5">
-            HORN
-          </span>
+          <span className="font-display text-[10px] font-bold leading-none mt-0.5">HORN</span>
         </button>
         <div className="rounded-full bg-[#FFFBEB] border-[3px] bv-border p-2">
           <AnalogDialGauge
@@ -175,7 +173,9 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
       </div>
     </div>
   ) : (
-    <div className={`${subpanelFrame} steel-plate-dark p-5 h-full flex items-center justify-around gap-4`}>
+    <div
+      className={`${subpanelFrame} steel-plate-dark p-5 h-full flex items-center justify-around gap-4`}
+    >
       <AnalogDialGauge
         label="Core Turbine Speed"
         value={primaryCore.actualRpm}
@@ -197,7 +197,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         size="md"
       />
     </div>
-  );
+  )
 
   const spectrumPod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full flex flex-col justify-between gap-3`}>
@@ -208,21 +208,24 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
       <div className="grid grid-cols-[1fr_auto] gap-4 items-center">
         <div className="crt-screen rounded-2xl p-3 h-32 flex items-end justify-around gap-2">
           {spectralBars.map((bar) => {
-            const pct = Math.min(100, Math.max(10, (bar.value / maxBarKw) * 100));
+            const pct = Math.min(100, Math.max(10, (bar.value / maxBarKw) * 100))
             return (
-              <div key={bar.label} className="flex flex-col items-center gap-1 h-full justify-end flex-1">
+              <div
+                key={bar.label}
+                className="flex flex-col items-center gap-1 h-full justify-end flex-1"
+              >
                 <span className="font-mono text-[10px] font-bold text-white tabular-nums">
                   {Math.round(bar.value)}
                 </span>
                 <div className="w-full max-w-[24px] bg-slate-800 rounded-full h-16 flex items-end overflow-hidden p-0.5">
                   <div
                     className={`w-full rounded-full ${bar.color} transition-all duration-300`}
-                    style={{height: `${pct}%`}}
+                    style={{ height: `${pct}%` }}
                   />
                 </div>
                 <span className="text-[10px] font-bold text-slate-300">{bar.label}</span>
               </div>
-            );
+            )
           })}
         </div>
 
@@ -239,7 +242,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         </div>
       </div>
     </div>
-  );
+  )
 
   const drivePod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full`}>
@@ -254,7 +257,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         shiftKwh={shiftKwh}
       />
     </div>
-  );
+  )
 
   const tunerClockPod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full`}>
@@ -269,7 +272,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         bayLightsOn={bayLightsOn}
       />
     </div>
-  );
+  )
 
   const intercomPod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full`}>
@@ -279,7 +282,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         onSendDispatch={onSendDispatch}
       />
     </div>
-  );
+  )
 
   const hopperCrewPod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full`}>
@@ -291,7 +294,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         bayLightsOn={bayLightsOn}
       />
     </div>
-  );
+  )
 
   const batteryPod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full bv-sticker-tilt-l`}>
@@ -304,7 +307,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         onToggleSurge={onToggleSurge}
       />
     </div>
-  );
+  )
 
   const oscilloscopePod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full`}>
@@ -317,13 +320,13 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         onToggleBreaker={onToggleBreaker}
       />
     </div>
-  );
+  )
 
   const scannerPod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full bv-sticker-tilt-r`}>
       <SilhouetteScanner machine={scannerMachine} />
     </div>
-  );
+  )
 
   const energyChartPod = (
     <div className={`${subpanelFrame} steel-plate p-5 h-full flex flex-col justify-between gap-4`}>
@@ -345,13 +348,9 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>
-      <EnergyFlowChart
-        history={history}
-        peakThresholdKw={peakThresholdKw}
-        heightClass="h-56"
-      />
+      <EnergyFlowChart history={history} peakThresholdKw={peakThresholdKw} heightClass="h-56" />
     </div>
-  );
+  )
 
   const auxDialsStrip = (compactGrid = false) => (
     <div
@@ -404,7 +403,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         size="sm"
       />
     </div>
-  );
+  )
 
   return (
     <div className="flex flex-col gap-6">
@@ -417,7 +416,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
 
         <div className="flex flex-wrap items-center gap-1.5">
           {allThemes.map((alt) => {
-            const selected = alt.id === theme.id;
+            const selected = alt.id === theme.id
             return (
               <button
                 key={alt.id}
@@ -444,7 +443,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
                 />
                 {alt.number} · {alt.name}
               </button>
-            );
+            )
           })}
         </div>
 
@@ -464,9 +463,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
       {/* 4-Column Top Summary Strip */}
       <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <div className="cartoon-box bv-card rounded-3xl p-4 flex flex-col justify-between gap-1">
-          <span className="text-xs font-bold bv-muted">
-            Fleet Machine Efficiency (OEE)
-          </span>
+          <span className="text-xs font-bold bv-muted">Fleet Machine Efficiency (OEE)</span>
           <div className="flex items-baseline justify-between gap-2">
             <span className="font-mono text-2xl font-bold bv-ink tabular-nums">
               {latest.fleetOee.toFixed(1)}%
@@ -482,11 +479,9 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
 
         <div
           className="cartoon-box rounded-3xl p-4 flex flex-col justify-between gap-1"
-          style={{backgroundColor: theme.kpiYellowBg}}
+          style={{ backgroundColor: theme.kpiYellowBg }}
         >
-          <span className="text-xs font-bold bv-muted">
-            Real-Time Energy Consumption
-          </span>
+          <span className="text-xs font-bold bv-muted">Real-Time Energy Consumption</span>
           <div className="flex items-baseline justify-between gap-2">
             <span className="font-mono text-2xl font-bold bv-ink tabular-nums">
               {latest.totalPowerKw.toFixed(1)} kW
@@ -502,11 +497,9 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
 
         <div
           className="cartoon-box rounded-3xl p-4 flex flex-col justify-between gap-1"
-          style={{backgroundColor: theme.kpiBlueBg}}
+          style={{ backgroundColor: theme.kpiBlueBg }}
         >
-          <span className="text-xs font-bold bv-muted">
-            Battery Cell & Grid Stability
-          </span>
+          <span className="text-xs font-bold bv-muted">Battery Cell & Grid Stability</span>
           <div className="flex items-baseline justify-between gap-2">
             <span className="font-mono text-2xl font-bold bv-ink tabular-nums">
               {latest.batteryPct.toFixed(1)}%
@@ -521,17 +514,15 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         </div>
 
         <div className="cartoon-box bv-card rounded-3xl p-4 flex flex-col justify-between gap-1">
-          <span className="text-xs font-bold bv-muted">
-            Active Maintenance Alerts
-          </span>
+          <span className="text-xs font-bold bv-muted">Active Maintenance Alerts</span>
           <div className="flex items-baseline justify-between gap-2">
             <span
               className={`font-mono text-2xl font-bold tabular-nums ${
                 criticalCount > 0
                   ? 'text-red-600'
                   : openAlerts.length > 0
-                  ? 'text-amber-600'
-                  : 'text-emerald-700'
+                    ? 'text-amber-600'
+                    : 'text-emerald-700'
               }`}
             >
               {openAlerts.length}
@@ -584,8 +575,8 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
                     ? d === 0
                       ? 'bg-amber-400'
                       : d === 1
-                      ? 'bg-red-500'
-                      : 'bg-emerald-500'
+                        ? 'bg-red-500'
+                        : 'bg-emerald-500'
                     : 'bg-amber-300 border-[3px] border-b-0 bv-border'
                 }`}
               />
@@ -599,21 +590,21 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
             <div className="flex items-end gap-4">
               <div
                 className="w-24 h-6 rounded-t-2xl border-[3px] border-b-0 bv-border"
-                style={{backgroundColor: theme.pipeLight}}
+                style={{ backgroundColor: theme.pipeLight }}
               />
               <div
                 className="w-28 h-8 rounded-t-2xl border-[3px] border-b-0 bv-border"
-                style={{backgroundColor: theme.plateAltBg}}
+                style={{ backgroundColor: theme.plateAltBg }}
               />
             </div>
             <div className="flex items-end gap-3">
               <div
                 className="w-14 h-5 rounded-t-2xl border-[3px] border-b-0 bv-border"
-                style={{backgroundColor: theme.pipeLavender}}
+                style={{ backgroundColor: theme.pipeLavender }}
               />
               <div
                 className="w-20 h-7 rounded-t-2xl border-[3px] border-b-0 bv-border"
-                style={{backgroundColor: theme.pipeLight}}
+                style={{ backgroundColor: theme.pipeLight }}
               />
             </div>
           </div>
@@ -624,12 +615,12 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
           className={`cartoon-box bv-toy-shell rounded-3xl flex flex-col ${
             isLineless ? 'p-5 sm:p-6 gap-5' : 'p-4 sm:p-5 gap-4'
           }`}
-          style={{backgroundColor: theme.bezelBg}}
+          style={{ backgroundColor: theme.bezelBg }}
         >
           {/* Toy Nameplate Sticker with Interactive HORN Button */}
           <div
             className={`${subpanelFrame} px-5 py-3 flex flex-wrap items-center justify-between gap-4`}
-            style={{backgroundColor: theme.nameplateBg}}
+            style={{ backgroundColor: theme.nameplateBg }}
           >
             <div className="flex items-center gap-3">
               <button
@@ -711,7 +702,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
               {/* Kelly Green Headlight Grille Bar & Aux Dials */}
               <div
                 className={`${subpanelFrame} p-4 flex flex-col gap-4`}
-                style={{backgroundColor: '#16A34A'}}
+                style={{ backgroundColor: '#16A34A' }}
               >
                 <div className="flex items-center justify-between px-4">
                   <span
@@ -868,7 +859,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
             <div className="flex items-start gap-4">
               <div
                 className="w-20 h-5 rounded-b-2xl border-[3px] border-t-0 bv-border"
-                style={{backgroundColor: theme.pipeRed}}
+                style={{ backgroundColor: theme.pipeRed }}
               />
               <div className="w-16 h-4 rounded-b-full bg-slate-900 border-[3px] border-t-0 bv-border" />
             </div>
@@ -886,9 +877,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
             }`}
           >
             <div>
-              <h3 className="font-display text-lg font-bold bv-ink">
-                Machine Efficiency Overview
-              </h3>
+              <h3 className="font-display text-lg font-bold bv-ink">Machine Efficiency Overview</h3>
               <p className="text-xs font-medium bv-muted">
                 Live OEE, load draw, temperature, and preventive service countdown
               </p>
@@ -937,10 +926,10 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
                           m.status === MachineStatus.Optimal
                             ? 'text-emerald-700'
                             : m.status === MachineStatus.Warning
-                            ? 'text-amber-700'
-                            : m.status === MachineStatus.Critical
-                            ? 'text-red-600'
-                            : 'bv-muted'
+                              ? 'text-amber-700'
+                              : m.status === MachineStatus.Critical
+                                ? 'text-red-600'
+                                : 'bv-muted'
                         }`}
                       >
                         {m.status}
@@ -973,9 +962,7 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
             }`}
           >
             <div>
-              <h3 className="font-display text-lg font-bold bv-ink">
-                Maintenance Alert Feed
-              </h3>
+              <h3 className="font-display text-lg font-bold bv-ink">Maintenance Alert Feed</h3>
               <p className="text-xs font-medium bv-muted">
                 {openAlerts.length} active items requiring review or clearance
               </p>
@@ -998,11 +985,10 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
             {openAlerts.length === 0 ? (
               <div className="p-8 text-center flex flex-col items-center justify-center gap-2 bv-muted">
                 <CheckCircle2 className="w-7 h-7 text-emerald-500" />
-                <div className="text-sm font-bold bv-ink">
-                  All Station Bays Nominal
-                </div>
+                <div className="text-sm font-bold bv-ink">All Station Bays Nominal</div>
                 <p className="text-xs bv-muted max-w-xs">
-                  No open maintenance alerts. Use Simulate Fault in the top bar or alert queue to test emergency response.
+                  No open maintenance alerts. Use Simulate Fault in the top bar or alert queue to
+                  test emergency response.
                 </p>
               </div>
             ) : (
@@ -1016,21 +1002,23 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
                             alert.severity === AlertSeverity.Critical
                               ? 'text-red-600'
                               : alert.severity === AlertSeverity.Warning
-                              ? 'text-amber-700'
-                              : 'text-blue-700'
+                                ? 'text-amber-700'
+                                : 'text-blue-700'
                           }`}
                         >
                           <AlertTriangle className="w-3.5 h-3.5" />
                           {alert.severity}
                         </span>
-                        <span aria-hidden="true" className="bv-muted">·</span>
+                        <span aria-hidden="true" className="bv-muted">
+                          ·
+                        </span>
                         <span className="font-mono font-bold bv-ink">{alert.id}</span>
-                        <span aria-hidden="true" className="bv-muted">·</span>
+                        <span aria-hidden="true" className="bv-muted">
+                          ·
+                        </span>
                         <span className="bv-muted">{alert.createdAt}</span>
                       </div>
-                      <div className="text-sm font-bold bv-ink mt-0.5">
-                        {alert.title}
-                      </div>
+                      <div className="text-sm font-bold bv-ink mt-0.5">{alert.title}</div>
                       <div className="text-xs bv-muted mt-0.5">
                         {alert.machineName} · {alert.metricLabel}:{' '}
                         <span className="font-mono font-bold bv-ink tabular-nums">
@@ -1055,5 +1043,5 @@ export const PowerStationView: React.FC<PowerStationViewProps> = ({
         </div>
       </section>
     </div>
-  );
-};
+  )
+}

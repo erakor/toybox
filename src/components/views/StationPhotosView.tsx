@@ -1,49 +1,58 @@
-import React, {useState} from 'react';
-import {Camera} from 'lucide-react';
+import React, { useState } from 'react'
+import { Camera } from 'lucide-react'
 
 const HARDWARE_MAPPINGS = [
   {
     region: 'Header & Red Siren / Roof Domes',
-    physicalElement: 'Blue toy dashboard ribbed red siren dome & primary truck 3 yellow roof domes + cream HORN/PRNDL stickers',
-    telemetryMapped: 'Power Station nameplate, coolant/manifold status, and 6-mode Station Matrix presets',
+    physicalElement:
+      'Blue toy dashboard ribbed red siren dome & primary truck 3 yellow roof domes + cream HORN/PRNDL stickers',
+    telemetryMapped:
+      'Power Station nameplate, coolant/manifold status, and 6-mode Station Matrix presets',
   },
   {
     region: 'Red Wheel Dual-Gauge Centerpiece',
-    physicalElement: 'Chunky red steering wheel ring framing recessed cream dial gauges and yellow truck headlights',
-    telemetryMapped: 'Core Turbine RPM, Fleet OEE %, Coolant Temp, Conduit PSI, Grid Hz & Load Factor',
+    physicalElement:
+      'Chunky red steering wheel ring framing recessed cream dial gauges and yellow truck headlights',
+    telemetryMapped:
+      'Core Turbine RPM, Fleet OEE %, Coolant Temp, Conduit PSI, Grid Hz & Load Factor',
   },
   {
     region: 'Centerpiece Amber Sunburst',
-    physicalElement: 'Radial orange striped panel with thick blue battery housing and rounded cyan lightning bolt',
-    telemetryMapped: 'Battery Cell Reserve %, Net Grid Draw vs Kinetic Regen (kW), and Surge Load Test trigger',
+    physicalElement:
+      'Radial orange striped panel with thick blue battery housing and rounded cyan lightning bolt',
+    telemetryMapped:
+      'Battery Cell Reserve %, Net Grid Draw vs Kinetic Regen (kW), and Surge Load Test trigger',
   },
   {
     region: 'Middle Spectral & Oscilloscope Bays',
-    physicalElement: 'Toy radio frequency scale bar, CRT sine screen, and 6 chunky clickable fuse breakers',
-    telemetryMapped: 'Per-Bay Power Spectrum, 60.0 Hz AC Harmonics (THD %), and 6 live bay circuit breakers',
+    physicalElement:
+      'Toy radio frequency scale bar, CRT sine screen, and 6 chunky clickable fuse breakers',
+    telemetryMapped:
+      'Per-Bay Power Spectrum, 60.0 Hz AC Harmonics (THD %), and 6 live bay circuit breakers',
   },
   {
     region: 'Purple Reticle Bay Scanner',
-    physicalElement: 'Purple sunburst backdrop with rounded reticle rails and cartoon worker/bot silhouettes',
-    telemetryMapped: 'MN-06 Kinetic Bay Scanner alignment drift (mm), throughput, and switchable Rig profiles',
+    physicalElement:
+      'Purple sunburst backdrop with rounded reticle rails and cartoon worker/bot silhouettes',
+    telemetryMapped:
+      'MN-06 Kinetic Bay Scanner alignment drift (mm), throughput, and switchable Rig profiles',
   },
-];
+]
 
 export const StationPhotosView: React.FC = () => {
-  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
+  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({})
 
-  const markError = (key: string) =>
-    setImgErrors((prev) => ({...prev, [key]: true}));
+  const markError = (key: string) => setImgErrors((prev) => ({ ...prev, [key]: true }))
 
   return (
     <div className="flex flex-col gap-6">
       {/* Vintage Toy Inspiration Photos */}
       <div className="cartoon-box bv-card rounded-3xl p-5">
-        <h2 className="font-display text-xl font-bold bv-ink">
-          Vintage Toy Design Inspiration
-        </h2>
+        <h2 className="font-display text-xl font-bold bv-ink">Vintage Toy Design Inspiration</h2>
         <p className="text-xs font-medium bv-muted mt-1 max-w-3xl">
-          The five flat dashboard designs channel these two chunky primary-colored toy references: rounded dome roofs, ribbed red sirens, steering-wheel dial frames, and crisp cream-paper sticker decals.
+          The five flat dashboard designs channel these two chunky primary-colored toy references:
+          rounded dome roofs, ribbed red sirens, steering-wheel dial frames, and crisp cream-paper
+          sticker decals.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
@@ -65,7 +74,8 @@ export const StationPhotosView: React.FC = () => {
               )}
             </div>
             <figcaption className="text-xs font-semibold bv-muted">
-              Toy Inspiration 1 · Sunny yellow cab with 3 rounded domes, red side bumpers, comic sky-blue decal & kelly green headlight grille
+              Toy Inspiration 1 · Sunny yellow cab with 3 rounded domes, red side bumpers, comic
+              sky-blue decal & kelly green headlight grille
             </figcaption>
           </figure>
 
@@ -87,7 +97,8 @@ export const StationPhotosView: React.FC = () => {
               )}
             </div>
             <figcaption className="text-xs font-semibold bv-muted">
-              Toy Inspiration 2 · Blue cockpit dash with top red siren dome, red wheel framing dial gauges, L/W buttons & cream paper stickers
+              Toy Inspiration 2 · Blue cockpit dash with top red siren dome, red wheel framing dial
+              gauges, L/W buttons & cream paper stickers
             </figcaption>
           </figure>
         </div>
@@ -95,11 +106,10 @@ export const StationPhotosView: React.FC = () => {
 
       {/* Physical Factory Reference Photos */}
       <div className="cartoon-box bv-card rounded-3xl p-5">
-        <h2 className="font-display text-xl font-bold bv-ink">
-          Physical Station Reference Photos
-        </h2>
+        <h2 className="font-display text-xl font-bold bv-ink">Physical Station Reference Photos</h2>
         <p className="text-xs font-medium bv-muted mt-1 max-w-3xl">
-          Every cartoon meter, sunburst battery cell, breaker bank, and reticle scanner maps directly to these physical Power Station hardware panels.
+          Every cartoon meter, sunburst battery cell, breaker bank, and reticle scanner maps
+          directly to these physical Power Station hardware panels.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
@@ -123,7 +133,8 @@ export const StationPhotosView: React.FC = () => {
               )}
             </div>
             <figcaption className="text-xs font-semibold bv-muted">
-              Unit Front Elevation · Corrugated silver hoses, twin white top cylinders, yellow bot scanner & pink-trimmed panels
+              Unit Front Elevation · Corrugated silver hoses, twin white top cylinders, yellow bot
+              scanner & pink-trimmed panels
             </figcaption>
           </figure>
 
@@ -147,7 +158,8 @@ export const StationPhotosView: React.FC = () => {
               )}
             </div>
             <figcaption className="text-xs font-semibold bv-muted">
-              Unit Angled Elevation · Lavender conduit stack, crimson fluted gear rotor, black stud base & pink roller-rig scanner
+              Unit Angled Elevation · Lavender conduit stack, crimson fluted gear rotor, black stud
+              base & pink roller-rig scanner
             </figcaption>
           </figure>
         </div>
@@ -172,9 +184,7 @@ export const StationPhotosView: React.FC = () => {
             <tbody className="divide-y divide-slate-300/40 text-xs">
               {HARDWARE_MAPPINGS.map((row) => (
                 <tr key={row.region} className="hover:bg-amber-400/10 transition-colors">
-                  <td className="py-3 px-4 font-bold bv-ink whitespace-nowrap">
-                    {row.region}
-                  </td>
+                  <td className="py-3 px-4 font-bold bv-ink whitespace-nowrap">{row.region}</td>
                   <td className="py-3 px-4 bv-muted font-medium">{row.physicalElement}</td>
                   <td className="py-3 px-4 bv-ink font-bold">{row.telemetryMapped}</td>
                 </tr>
@@ -184,5 +194,5 @@ export const StationPhotosView: React.FC = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

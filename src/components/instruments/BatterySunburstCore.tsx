@@ -1,14 +1,14 @@
-import React from 'react';
-import {Zap} from 'lucide-react';
-import {useStationTheme} from '../../context/ThemeContext';
+import React from 'react'
+import { Zap } from 'lucide-react'
+import { useStationTheme } from '../../context/ThemeContext'
 
 interface BatterySunburstCoreProps {
-  batteryPct: number;
-  totalPowerKw: number;
-  regenKw: number;
-  shiftKwh: number;
-  surgeActive: boolean;
-  onToggleSurge: () => void;
+  batteryPct: number
+  totalPowerKw: number
+  regenKw: number
+  shiftKwh: number
+  surgeActive: boolean
+  onToggleSurge: () => void
 }
 
 export const BatterySunburstCore: React.FC<BatterySunburstCoreProps> = ({
@@ -19,17 +19,15 @@ export const BatterySunburstCore: React.FC<BatterySunburstCoreProps> = ({
   surgeActive,
   onToggleSurge,
 }) => {
-  const {theme} = useStationTheme();
-  const clampedPct = Math.min(100, Math.max(0, batteryPct));
-  const netDraw = Number((totalPowerKw - regenKw).toFixed(1));
+  const { theme } = useStationTheme()
+  const clampedPct = Math.min(100, Math.max(0, batteryPct))
+  const netDraw = Number((totalPowerKw - regenKw).toFixed(1))
 
   return (
     <div className="flex flex-col h-full justify-between gap-4">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h3 className="font-display text-lg font-bold bv-ink">
-            Battery & Energy Surge Core
-          </h3>
+          <h3 className="font-display text-lg font-bold bv-ink">Battery & Energy Surge Core</h3>
           <p className="text-xs font-medium bv-muted">
             Primary kinetic cell · {surgeActive ? 'Peak Surge Load Active' : 'Balanced Storage'}
           </p>
@@ -110,7 +108,7 @@ export const BatterySunburstCore: React.FC<BatterySunburstCoreProps> = ({
                   width="64"
                   height={(clampedPct / 100) * 120}
                   fill={surgeActive ? '#FACC15' : '#0284C7'}
-                  style={{transition: 'y 350ms ease, height 350ms ease'}}
+                  style={{ transition: 'y 350ms ease, height 350ms ease' }}
                 />
                 <rect x="28" y="34" width="10" height="108" rx="5" fill="#FFFFFF" opacity="0.2" />
                 {[54, 78, 102, 126].map((yPos) => (
@@ -147,9 +145,7 @@ export const BatterySunburstCore: React.FC<BatterySunburstCoreProps> = ({
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
                 <div className="text-slate-400">Net Grid</div>
-                <div className="font-mono font-bold text-white tabular-nums">
-                  {netDraw} kW
-                </div>
+                <div className="font-mono font-bold text-white tabular-nums">{netDraw} kW</div>
               </div>
               <div>
                 <div className="text-slate-400">Regen</div>
@@ -192,5 +188,5 @@ export const BatterySunburstCore: React.FC<BatterySunburstCoreProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

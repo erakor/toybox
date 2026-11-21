@@ -1,8 +1,8 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import fs from 'fs';
-import path from 'path';
-import {defineConfig} from 'vite';
+import tailwindcss from '@tailwindcss/vite'
+import react from '@vitejs/plugin-react'
+import fs from 'node:fs'
+import path from 'node:path'
+import { defineConfig } from 'vite'
 
 export default defineConfig(() => {
   return {
@@ -17,13 +17,13 @@ export default defineConfig(() => {
         apply: 'build',
         closeBundle(error?: Error): void {
           if (error) {
-            return;
+            return
           }
-          const distDir = path.resolve(__dirname, 'dist');
-          const srcAssets = path.resolve(__dirname, 'src/assets');
-          const distAssets = path.resolve(distDir, 'src/assets');
+          const distDir = path.resolve(__dirname, 'dist')
+          const srcAssets = path.resolve(__dirname, 'src/assets')
+          const distAssets = path.resolve(distDir, 'src/assets')
           if (fs.existsSync(distDir) && fs.existsSync(srcAssets)) {
-            fs.cpSync(srcAssets, distAssets, {recursive: true, force: true});
+            fs.cpSync(srcAssets, distAssets, { recursive: true, force: true })
           }
         },
       },
@@ -40,5 +40,5 @@ export default defineConfig(() => {
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
-  };
-});
+  }
+})

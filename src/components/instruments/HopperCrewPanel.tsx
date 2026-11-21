@@ -1,14 +1,14 @@
-import React from 'react';
-import {RotateCw, Timer} from 'lucide-react';
-import {useStationTheme} from '../../context/ThemeContext';
-import {MachineUnit} from '../../types/factory';
+import React from 'react'
+import { RotateCw, Timer } from 'lucide-react'
+import { useStationTheme } from '../../context/ThemeContext'
+import { type MachineUnit } from '../../types/factory'
 
 interface HopperCrewPanelProps {
-  machines: MachineUnit[];
-  hopperPct: number;
-  completedBatches: number;
-  onTipHopperBatch: () => void;
-  bayLightsOn: boolean;
+  machines: MachineUnit[]
+  hopperPct: number
+  completedBatches: number
+  onTipHopperBatch: () => void
+  bayLightsOn: boolean
 }
 
 export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
@@ -18,31 +18,29 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
   onTipHopperBatch,
   bayLightsOn,
 }) => {
-  const {theme} = useStationTheme();
-  const isLineless = theme.svgStrokeWidth === 0;
+  const { theme } = useStationTheme()
+  const isLineless = theme.svgStrokeWidth === 0
 
-  const activeList = machines.filter((m) => m.active);
+  const activeList = machines.filter((m) => m.active)
   const avgAvailability = activeList.length
     ? activeList.reduce((a, m) => a + m.availability, 0) / activeList.length
-    : 0;
+    : 0
   const avgPerformance = activeList.length
     ? activeList.reduce((a, m) => a + m.performance, 0) / activeList.length
-    : 0;
+    : 0
   const avgQuality = activeList.length
     ? activeList.reduce((a, m) => a + m.quality, 0) / activeList.length
-    : 0;
+    : 0
 
   const nextServiceMachine = [...machines].sort(
-    (a, b) => a.serviceHoursLeft - b.serviceHoursLeft
-  )[0];
+    (a, b) => a.serviceHoursLeft - b.serviceHoursLeft,
+  )[0]
 
   return (
     <div className="flex flex-col justify-between gap-3.5 h-full">
       <div className="flex items-center justify-between gap-2">
         <div>
-          <h3 className="font-display text-lg font-bold bv-ink">
-            Cab Crew, Hopper & OEE Split
-          </h3>
+          <h3 className="font-display text-lg font-bold bv-ink">Cab Crew, Hopper & OEE Split</h3>
           <p className="text-xs font-medium bv-muted">
             Batch dumper bin · Availability / Performance / Quality & service timer
           </p>
@@ -57,7 +55,7 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
         {/* Dual-Operator Sky-Blue Cab Window Sticker */}
         <div
           className="rounded-2xl cartoon-box-sm p-2.5 flex items-center gap-3"
-          style={{backgroundColor: '#38BDF8'}}
+          style={{ backgroundColor: '#38BDF8' }}
         >
           <svg viewBox="0 0 116 68" className="w-24 h-14 shrink-0">
             {/* Operator 1 (Yellow Pigtails & Red Overalls) */}
@@ -69,13 +67,48 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
               stroke={isLineless ? 'none' : '#1E293B'}
               strokeWidth={isLineless ? 0 : 2.5}
             />
-            <circle cx="17" cy="28" r="6" fill="#FACC15" stroke={isLineless ? 'none' : '#1E293B'} strokeWidth={isLineless ? 0 : 2} />
-            <circle cx="47" cy="28" r="6" fill="#FACC15" stroke={isLineless ? 'none' : '#1E293B'} strokeWidth={isLineless ? 0 : 2} />
-            <path d="M 20 22 Q 32 10 44 22" fill="#FACC15" stroke={isLineless ? 'none' : '#1E293B'} strokeWidth={isLineless ? 0 : 2} strokeLinecap="round" />
+            <circle
+              cx="17"
+              cy="28"
+              r="6"
+              fill="#FACC15"
+              stroke={isLineless ? 'none' : '#1E293B'}
+              strokeWidth={isLineless ? 0 : 2}
+            />
+            <circle
+              cx="47"
+              cy="28"
+              r="6"
+              fill="#FACC15"
+              stroke={isLineless ? 'none' : '#1E293B'}
+              strokeWidth={isLineless ? 0 : 2}
+            />
+            <path
+              d="M 20 22 Q 32 10 44 22"
+              fill="#FACC15"
+              stroke={isLineless ? 'none' : '#1E293B'}
+              strokeWidth={isLineless ? 0 : 2}
+              strokeLinecap="round"
+            />
             <circle cx="27" cy="27" r="2" fill="#1E293B" />
             <circle cx="37" cy="27" r="2" fill="#1E293B" />
-            <path d="M 27 33 Q 32 37 37 33" fill="none" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
-            <rect x="18" y="42" width="28" height="22" rx="10" fill="#EF4444" stroke={isLineless ? 'none' : '#1E293B'} strokeWidth={isLineless ? 0 : 2.5} />
+            <path
+              d="M 27 33 Q 32 37 37 33"
+              fill="none"
+              stroke="#1E293B"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+            />
+            <rect
+              x="18"
+              y="42"
+              width="28"
+              height="22"
+              rx="10"
+              fill="#EF4444"
+              stroke={isLineless ? 'none' : '#1E293B'}
+              strokeWidth={isLineless ? 0 : 2.5}
+            />
 
             {/* Operator 2 (Yellow Hardhat & Blue Check Shirt) */}
             <circle
@@ -86,19 +119,39 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
               stroke={isLineless ? 'none' : '#1E293B'}
               strokeWidth={isLineless ? 0 : 2.5}
             />
-            <rect x="68" y="13" width="32" height="10" rx="5" fill="#FACC15" stroke={isLineless ? 'none' : '#1E293B'} strokeWidth={isLineless ? 0 : 2} />
+            <rect
+              x="68"
+              y="13"
+              width="32"
+              height="10"
+              rx="5"
+              fill="#FACC15"
+              stroke={isLineless ? 'none' : '#1E293B'}
+              strokeWidth={isLineless ? 0 : 2}
+            />
             <circle cx="79" cy="29" r="2" fill="#1E293B" />
             <circle cx="89" cy="29" r="2" fill="#1E293B" />
-            <path d="M 79 35 Q 84 39 89 35" fill="none" stroke="#1E293B" strokeWidth="2.2" strokeLinecap="round" />
-            <rect x="70" y="44" width="28" height="20" rx="10" fill="#1D4ED8" stroke={isLineless ? 'none' : '#1E293B'} strokeWidth={isLineless ? 0 : 2.5} />
+            <path
+              d="M 79 35 Q 84 39 89 35"
+              fill="none"
+              stroke="#1E293B"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+            />
+            <rect
+              x="70"
+              y="44"
+              width="28"
+              height="20"
+              rx="10"
+              fill="#1D4ED8"
+              stroke={isLineless ? 'none' : '#1E293B'}
+              strokeWidth={isLineless ? 0 : 2.5}
+            />
           </svg>
           <div className="min-w-0">
-            <div className="font-display text-sm font-bold text-slate-950">
-              Shift Crew A-04
-            </div>
-            <div className="text-[11px] font-bold text-slate-900">
-              K. Sato · M. Lindqvist
-            </div>
+            <div className="font-display text-sm font-bold text-slate-950">Shift Crew A-04</div>
+            <div className="text-[11px] font-bold text-slate-900">K. Sato · M. Lindqvist</div>
             <div className="text-[10px] font-mono font-bold text-slate-900 mt-0.5">
               {activeList.length}/6 Active · {bayLightsOn ? 'Lights ON' : 'Std'}
             </div>
@@ -114,11 +167,11 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
             </div>
             <div
               className="h-4 rounded-full bg-slate-200 overflow-hidden p-0.5"
-              style={{border: isLineless ? 'none' : `2px solid ${theme.borderColor}`}}
+              style={{ border: isLineless ? 'none' : `2px solid ${theme.borderColor}` }}
             >
               <div
                 className="h-full rounded-full bg-red-500 transition-all duration-300"
-                style={{width: `${Math.min(100, hopperPct)}%`}}
+                style={{ width: `${Math.min(100, hopperPct)}%` }}
               />
             </div>
           </div>
@@ -138,9 +191,9 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
       <div className="bv-card cartoon-box-sm rounded-2xl p-3 flex flex-col gap-2">
         <div className="grid grid-cols-3 gap-2 text-center">
           {[
-            {label: 'Availability', val: avgAvailability, color: 'bg-sky-400'},
-            {label: 'Performance', val: avgPerformance, color: 'bg-amber-400'},
-            {label: 'Quality', val: avgQuality, color: 'bg-emerald-400'},
+            { label: 'Availability', val: avgAvailability, color: 'bg-sky-400' },
+            { label: 'Performance', val: avgPerformance, color: 'bg-amber-400' },
+            { label: 'Quality', val: avgQuality, color: 'bg-emerald-400' },
           ].map((factor) => (
             <div key={factor.label}>
               <div className="flex items-center justify-between text-[10px] font-bold bv-ink mb-1">
@@ -150,7 +203,7 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
               <div className="h-2.5 rounded-full bg-slate-200 overflow-hidden">
                 <div
                   className={`h-full rounded-full ${factor.color} transition-all duration-300`}
-                  style={{width: `${factor.val}%`}}
+                  style={{ width: `${factor.val}%` }}
                 />
               </div>
             </div>
@@ -170,5 +223,5 @@ export const HopperCrewPanel: React.FC<HopperCrewPanelProps> = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}

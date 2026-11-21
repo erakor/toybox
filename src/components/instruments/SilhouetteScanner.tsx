@@ -1,26 +1,22 @@
-import React, {useState} from 'react';
-import {useStationTheme} from '../../context/ThemeContext';
-import {MachineUnit} from '../../types/factory';
+import React, { useState } from 'react'
+import { useStationTheme } from '../../context/ThemeContext'
+import { type MachineUnit } from '../../types/factory'
 
 interface SilhouetteScannerProps {
-  machine: MachineUnit;
+  machine: MachineUnit
 }
 
-export const SilhouetteScanner: React.FC<SilhouetteScannerProps> = ({machine}) => {
-  const {theme} = useStationTheme();
-  const [bayMode, setBayMode] = useState<'roller' | 'assembly'>('roller');
+export const SilhouetteScanner: React.FC<SilhouetteScannerProps> = ({ machine }) => {
+  const { theme } = useStationTheme()
+  const [bayMode, setBayMode] = useState<'roller' | 'assembly'>('roller')
 
-  const driftMm = machine.active
-    ? Number((machine.vibrationMmS * 0.85).toFixed(2))
-    : 0;
+  const driftMm = machine.active ? Number((machine.vibrationMmS * 0.85).toFixed(2)) : 0
 
   return (
     <div className="flex flex-col gap-3 h-full justify-between">
       <div className="flex items-center justify-between gap-2">
         <div>
-          <h3 className="font-display text-lg font-bold bv-ink">
-            Kinetic Bay Scanner
-          </h3>
+          <h3 className="font-display text-lg font-bold bv-ink">Kinetic Bay Scanner</h3>
           <p className="text-xs font-medium bv-muted">
             {machine.code} · {machine.name}
           </p>
@@ -78,8 +74,24 @@ export const SilhouetteScanner: React.FC<SilhouetteScannerProps> = ({machine}) =
           />
           {[35, 62, 90, 118, 145].map((y) => (
             <React.Fragment key={y}>
-              <line x1="10" y1={y} x2="22" y2={y} stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
-              <line x1="238" y1={y} x2="250" y2={y} stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" />
+              <line
+                x1="10"
+                y1={y}
+                x2="22"
+                y2={y}
+                stroke="#FFFFFF"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
+              <line
+                x1="238"
+                y1={y}
+                x2="250"
+                y2={y}
+                stroke="#FFFFFF"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              />
             </React.Fragment>
           ))}
         </svg>
@@ -170,5 +182,5 @@ export const SilhouetteScanner: React.FC<SilhouetteScannerProps> = ({machine}) =
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

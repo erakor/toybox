@@ -1,17 +1,17 @@
-import React from 'react';
-import {PowerPreset} from '../../types/factory';
+import React from 'react'
+import { PowerPreset } from '../../types/factory'
 
 interface MatrixKeypadProps {
-  activePreset: PowerPreset;
-  onSelectPreset: (preset: PowerPreset) => void;
-  loadBias: number;
-  onChangeLoadBias: (val: number) => void;
+  activePreset: PowerPreset
+  onSelectPreset: (preset: PowerPreset) => void
+  loadBias: number
+  onChangeLoadBias: (val: number) => void
 }
 
 const MATRIX_TILES: {
-  preset: PowerPreset;
-  shortLabel: string;
-  colorClass: string;
+  preset: PowerPreset
+  shortLabel: string
+  colorClass: string
 }[] = [
   {
     preset: PowerPreset.EcoBalance,
@@ -43,7 +43,7 @@ const MATRIX_TILES: {
     shortLabel: 'SHED',
     colorClass: 'bg-white text-slate-950',
   },
-];
+]
 
 export const MatrixKeypad: React.FC<MatrixKeypadProps> = ({
   activePreset,
@@ -54,9 +54,7 @@ export const MatrixKeypad: React.FC<MatrixKeypadProps> = ({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between gap-2">
-        <span className="font-display text-sm font-bold bv-ink">
-          Station Mode Matrix
-        </span>
+        <span className="font-display text-sm font-bold bv-ink">Station Mode Matrix</span>
         <span className="font-mono text-xs font-bold text-slate-950 bg-amber-300 cartoon-box-sm rounded-xl px-2.5 py-0.5">
           {activePreset}
         </span>
@@ -65,7 +63,7 @@ export const MatrixKeypad: React.FC<MatrixKeypadProps> = ({
       {/* Soft-Rounded Tactile Color Tile Matrix */}
       <div className="grid grid-cols-3 gap-2.5 crt-screen p-3 rounded-2xl">
         {MATRIX_TILES.map((tile) => {
-          const isSelected = activePreset === tile.preset;
+          const isSelected = activePreset === tile.preset
           return (
             <button
               key={tile.preset}
@@ -78,13 +76,16 @@ export const MatrixKeypad: React.FC<MatrixKeypadProps> = ({
             >
               {tile.shortLabel}
             </button>
-          );
+          )
         })}
       </div>
 
       {/* Pill-Rounded Cross-Actuator / Load Bias Track */}
       <div className="bv-card cartoon-box-sm rounded-2xl px-3.5 py-2.5 flex items-center gap-3">
-        <div className="w-7 h-7 shrink-0 relative flex items-center justify-center" aria-hidden="true">
+        <div
+          className="w-7 h-7 shrink-0 relative flex items-center justify-center"
+          aria-hidden="true"
+        >
           <div className="w-2.5 h-7 bg-slate-700 rounded-full" />
           <div className="w-7 h-2.5 bg-slate-400 rounded-full absolute" />
         </div>
@@ -107,5 +108,5 @@ export const MatrixKeypad: React.FC<MatrixKeypadProps> = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

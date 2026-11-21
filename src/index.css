@@ -1,9 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --font-display: "Fredoka", ui-rounded, ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-display: 'Fredoka', ui-rounded, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
@@ -81,7 +81,8 @@
 .cartoon-btn {
   border: 2.5px solid var(--bv-border);
   box-shadow: none;
-  transition: transform 110ms cubic-bezier(0.16, 1, 0.3, 1),
+  transition:
+    transform 110ms cubic-bezier(0.16, 1, 0.3, 1),
     background-color 140ms ease;
 }
 
@@ -90,13 +91,13 @@
 }
 
 /* 01 CockpitHorn: Recessed blue cockpit well + cream paper stickers */
-html[data-style="cockpit-horn"] .bv-subpanel {
+html[data-style='cockpit-horn'] .bv-subpanel {
   border: 3px solid #1e293b !important;
   box-shadow: none;
 }
 
 /* 02 DumpCab: Bold comic ink borders with warm sticker ring */
-html[data-style="dump-cab"] .bv-subpanel {
+html[data-style='dump-cab'] .bv-subpanel {
   border: 3px solid #1e293b !important;
   box-shadow: 0 0 0 3px #ffffff;
 }
@@ -104,73 +105,73 @@ html[data-style="dump-cab"] .bv-subpanel {
 /* ============================================================================
    03 LINELESS PRIMARY TOY BLOCKS (0px Outlines, Extra-Chubby Pill Geometry)
    ============================================================================ */
-html[data-style="lineless-blocks"] .cartoon-box,
-html[data-style="lineless-blocks"] .cartoon-box-sm,
-html[data-style="lineless-blocks"] .cartoon-btn,
-html[data-style="lineless-blocks"] .crt-screen,
-html[data-style="lineless-blocks"] .bv-subpanel {
+html[data-style='lineless-blocks'] .cartoon-box,
+html[data-style='lineless-blocks'] .cartoon-box-sm,
+html[data-style='lineless-blocks'] .cartoon-btn,
+html[data-style='lineless-blocks'] .crt-screen,
+html[data-style='lineless-blocks'] .bv-subpanel {
   border: 0 solid transparent !important;
   box-shadow: none !important;
   border-radius: 2rem !important;
 }
 
-html[data-style="lineless-blocks"] .cartoon-btn {
+html[data-style='lineless-blocks'] .cartoon-btn {
   border-radius: 1.25rem !important;
 }
 
 /* ============================================================================
    04 CREAM-HALO STICKER SHEET (Double Cream + Ink Peel Rims + Slight Tilt)
    ============================================================================ */
-html[data-style="cream-decal"] .cartoon-box {
+html[data-style='cream-decal'] .cartoon-box {
   border: 3px solid #fef3c7;
   box-shadow: 0 0 0 3px #1e293b;
 }
 
-html[data-style="cream-decal"] .bv-subpanel {
+html[data-style='cream-decal'] .bv-subpanel {
   border: 3px solid #fef3c7 !important;
   box-shadow: 0 0 0 2.5px #1e293b;
 }
 
-html[data-style="cream-decal"] .cartoon-box-sm,
-html[data-style="cream-decal"] .cartoon-btn,
-html[data-style="cream-decal"] .crt-screen {
+html[data-style='cream-decal'] .cartoon-box-sm,
+html[data-style='cream-decal'] .cartoon-btn,
+html[data-style='cream-decal'] .crt-screen {
   border: 2.5px solid #fef3c7;
   box-shadow: 0 0 0 2px #1e293b;
 }
 
-html[data-style="cream-decal"] .bv-sticker-tilt-l {
+html[data-style='cream-decal'] .bv-sticker-tilt-l {
   transform: rotate(-0.8deg);
 }
 
-html[data-style="cream-decal"] .bv-sticker-tilt-r {
+html[data-style='cream-decal'] .bv-sticker-tilt-r {
   transform: rotate(0.8deg);
 }
 
 /* ============================================================================
    05 RETRO TOYBOX SCREENPRINT (Solid Flat Offset + Candy-Stripe Trim)
    ============================================================================ */
-html[data-style="screenprint-toy"] .cartoon-box {
+html[data-style='screenprint-toy'] .cartoon-box {
   border: 3px solid #1e293b;
   box-shadow: 6px 6px 0 #1e293b;
 }
 
-html[data-style="screenprint-toy"] .bv-subpanel {
+html[data-style='screenprint-toy'] .bv-subpanel {
   border: 3px solid #1e293b !important;
   box-shadow: 4px 4px 0 #1e293b;
 }
 
-html[data-style="screenprint-toy"] .cartoon-box-sm,
-html[data-style="screenprint-toy"] .cartoon-btn {
+html[data-style='screenprint-toy'] .cartoon-box-sm,
+html[data-style='screenprint-toy'] .cartoon-btn {
   border: 2.5px solid #1e293b;
   box-shadow: 3px 3px 0 #1e293b;
 }
 
-html[data-style="screenprint-toy"] .cartoon-btn:active {
+html[data-style='screenprint-toy'] .cartoon-btn:active {
   transform: translate(2px, 2px);
   box-shadow: 1px 1px 0 #1e293b;
 }
 
-html[data-style="screenprint-toy"] .bv-toy-shell {
+html[data-style='screenprint-toy'] .bv-toy-shell {
   background-image: repeating-linear-gradient(
     -45deg,
     #16a34a 0px,
@@ -184,38 +185,19 @@ html[data-style="screenprint-toy"] .bv-toy-shell {
    RIBBED SIREN / FLAT SUNBURST / HOSE TEXTURES & SCANNER MOTION
    ============================================================================ */
 .siren-ribs {
-  background: repeating-linear-gradient(
-    90deg,
-    #ef4444 0px,
-    #ef4444 5px,
-    #dc2626 5px,
-    #dc2626 9px
-  );
+  background: repeating-linear-gradient(90deg, #ef4444 0px, #ef4444 5px, #dc2626 5px, #dc2626 9px);
 }
 
 .sunburst-orange {
-  background: repeating-conic-gradient(
-    from -8deg,
-    #fb923c 0deg 12deg,
-    #f97316 12deg 24deg
-  );
+  background: repeating-conic-gradient(from -8deg, #fb923c 0deg 12deg, #f97316 12deg 24deg);
 }
 
 .sunburst-purple {
-  background: repeating-conic-gradient(
-    from 0deg,
-    #8b5cf6 0deg 14deg,
-    #7c3aed 14deg 28deg
-  );
+  background: repeating-conic-gradient(from 0deg, #8b5cf6 0deg 14deg, #7c3aed 14deg 28deg);
 }
 
 .hose-ribs {
-  background: repeating-linear-gradient(
-    90deg,
-    #334155 0px,
-    #64748b 4px,
-    #1e293b 8px
-  );
+  background: repeating-linear-gradient(90deg, #334155 0px, #64748b 4px, #1e293b 8px);
 }
 
 @keyframes laserScan {
